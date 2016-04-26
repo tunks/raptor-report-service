@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd">
+
+    <!--  monogo auditing -->
+	<mongo:auditing auditor-aware-ref="dataAuditor" />
+	
+	<bean id="dataAuditor" class="com.att.raptor.report.data.support.DataAuditor" />
+	
+	<!-- mongodb configuration -->
+	<bean id="mongoClient"
+		class="org.springframework.data.mongodb.core.MongoClientFactoryBean">
+		<property name="host" value="${mongo.host}" />
+		<property name="port" value="${mongo.port}" />
+	</bean>
+	
+	<!--  mongo template -->
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongo" ref="mongoClient" />
+		<constructor-arg value="${mongo.db}" />
+	</bean>
+
+
+         <mongo:repositories base-package="com.att.raptor.report.data.repositories" 
+                         factory-class="com.att.raptor.report.data.support.CustomMongoRepositoryFactoryBean" />
+         <!-- scan services -->
+         <context:component-scan base-package="com.att.raptor.report.data.service" /> 
+         
+         <!-- scan  event listeners  -->
+	 <context:component-scan base-package="com.att.raptor.report.data.listeners" /> 
+
+</beans>

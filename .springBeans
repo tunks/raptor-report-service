@@ -8,6 +8,9 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>java:com.att.raptor.report.RaptorReportServiceApplication</config>
+		<config>src/main/resources/application-context.xml</config>
+		<config>src/main/resources/spring-mongo-config.xml</config>
+		<config>src/main/resources/spring-jdbc-config.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
