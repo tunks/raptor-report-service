@@ -96,9 +96,8 @@ public class JdbcDataDaoTest {
             }
         };
         
-        ResultSet expResult = null;
         List result = jdbcDatadao.getResults(query);
-        assertEquals(expResult, result);
+        assertNotNull(result);
     }
     
 }

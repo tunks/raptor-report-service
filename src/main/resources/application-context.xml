@@ -17,4 +17,10 @@
     <!-- import the bean configuration files -->
     <import resource="spring-mongo-config.xml"/>
     <import resource="spring-jdbc-config.xml" />
+    
+    <!-- scan  web controllers -->
+    <context:component-scan base-package="com.att.raptor.report.web.controller" /> 
+    
+    <!-- data object projections factory -->
+    <bean id="projectionFactory" class="org.springframework.data.projection.SpelAwareProxyProjectionFactory" />
 </beans>

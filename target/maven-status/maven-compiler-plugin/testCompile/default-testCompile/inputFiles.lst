@@ -1,5 +1,7 @@
 /Users/ebrimatunkara/development/projects/raptor-report/src/test/java/com/att/raptor/report/data/repositories/DataSourceRepositoryTest.java
+/Users/ebrimatunkara/development/projects/raptor-report/src/test/java/com/att/raptor/report/data/service/ReportFolderServiceTest.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/test/java/com/att/raptor/report/data/repositories/DataReportRepositoryTest.java
-/Users/ebrimatunkara/development/projects/raptor-report/src/test/java/com/example/RaptorReportServiceApplicationTests.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/test/java/com/att/raptor/report/engine/dao/JdbcDataDaoTest.java
+/Users/ebrimatunkara/development/projects/raptor-report/src/test/java/com/att/raptor/report/data/repositories/ReportComponentRepositoryTest.java
+/Users/ebrimatunkara/development/projects/raptor-report/src/test/java/com/att/raptor/report/data/repositories/ReportFolderRepositoryTest.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/test/java/com/att/raptor/report/data/repositories/ReportTemplateRepositoryTest.java

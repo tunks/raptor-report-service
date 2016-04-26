@@ -11,11 +11,13 @@ import com.att.raptor.report.data.domain.ReportFolder;
 import com.att.raptor.report.data.repositories.ReportFolderRepository;
 import java.util.List;
 import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 /**
  * ReportFolderService -- implementation of the report service
  * @author ebrimatunkara
  */
+@Service("reportFolderService")
 public class ReportFolderService implements CrudBaseService<ReportFolder,String>{
     @Resource
     private ReportFolderRepository  reportFolderRepository;
@@ -38,5 +40,9 @@ public class ReportFolderService implements CrudBaseService<ReportFolder,String>
     @Override
     public ReportFolder update(ReportFolder object) {
        return reportFolderRepository.update(object);
+    }
+
+    List< ReportFolder> findAllRoots() {
+        return reportFolderRepository.findByParentIdNull();
     }
 }

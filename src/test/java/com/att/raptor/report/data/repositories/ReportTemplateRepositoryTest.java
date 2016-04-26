@@ -84,56 +84,14 @@ public class ReportTemplateRepositoryTest {
     }
 
     /**
-     * Test method for
-     * {@link org.springframework.data.mongodb.repository.MongoRepository#update(java.lang.Object)}.
-     */
-    @Test
-    public void testUpdate() {
-        //org.springframework.data.mongodb.core.MongoOperations.update
-        ReportTemplate template = new ReportTemplate("report template xxxx1");
-        template.setId("5711ded9d4c6fbd3917af0da");
-        Template result = reportTemplateRepository.update(template);
-        System.out.println("version " + result.getVersion());
-        assertEquals(template.getId(), result.getId());
-    }
-
-//	/**
-//	 * Test method for {@link org.springframework.data.mongodb.repository.MongoRepository#findAll(org.springframework.data.domain.Sort)}.
-//	 */
-//	@Test
-//	public void testFindAllSort() {
-//		fail("Not yet implemented");
-//	}
-//
-//	/**
-//	 * Test method for {@link org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)}.
-//	 */
-//	@Test
-//	public void testFindOne() {
-//		fail("Not yet implemented");
-//	}
-//
-//	/**
-//	 * Test method for {@link org.springframework.data.repository.CrudRepository#exists(java.io.Serializable)}.
-//	 */
-//	@Test
-//	public void testExists() {
-//		fail("Not yet implemented");
-//	}
-//
-//	/**
-//	 * Test method for {@link org.springframework.data.repository.CrudRepository#count()}.
-//	 */
-//	@Test
-//	public void testCount() {
-//		fail("Not yet implemented");
-//	}
-//
-//	/**
-//	 * Test method for {@link org.springframework.data.repository.CrudRepository#delete(java.lang.Object)}.
-//	 */
-//	@Test
-//	public void testDeleteT() {
-//		fail("Not yet implemented");
-//	}
+//     * Test method for
+//     * {@link org.springframework.data.mongodb.repository.MongoRepository#update(java.lang.Object)}.
+//     */
+//    @Test
+//    public void testUpdate() {
+//        //org.springframework.data.mongodb.core.MongoOperations.update
+//        ReportTemplate template = new ReportTemplate("report template xxxx1");
+//        Template result = reportTemplateRepository.update(template);    
+//        assertNotNull(result);
+//    }
 }

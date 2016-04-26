@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * ReportFolderRepository - data access layer interface
  * @author ebrimatunkara
  */
+
 public interface ReportFolderRepository extends MongoRepository<ReportFolder,String>, 
                                                 DataRepositoryCustom<ReportFolder, String> {
     List<ReportFolder> findByParentId(String parentId);

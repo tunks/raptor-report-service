@@ -15,28 +15,41 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
+ * ReportFolder Service test
  *
  * @author ebrimatunkara
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:application-context.xml"})
 public class ReportFolderServiceTest {
-    
+
+    @Autowired
+    private ReportFolderService reportFolderService;
+
+    private ReportFolder mainReportFolder;
+
     public ReportFolderServiceTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        mainReportFolder = new ReportFolder("Service Report folder 1");
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -47,28 +60,24 @@ public class ReportFolderServiceTest {
     @Test
     public void testFindAll() {
         System.out.println("findAll");
-        ReportFolderService instance = new ReportFolderService();
-        List<ReportFolder> expResult = null;
-        List<ReportFolder> result = instance.findAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<ReportFolder> result = reportFolderService.findAll();
+        if (result.size() > 0) {
+            assertTrue(result.size() > 0);
+        }
     }
 
-    /**
-     * Test of find method, of class ReportFolderService.
-     */
-    @Test
-    public void testFind() {
-        System.out.println("find");
-        String id = "";
-        ReportFolderService instance = new ReportFolderService();
-        ReportFolder expResult = null;
-        ReportFolder result = instance.find(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    /**
+//     * Test of find method, of class ReportFolderService.
+//     */
+//    @Test
+//    public void testFind() {
+//        System.out.println("find");
+//        String id = "";
+//        ReportFolderService instance = new ReportFolderService();
+//        ReportFolder expResult = null;
+//        ReportFolder result = instance.find(id);
+//        assertEquals(expResult, result);
+//    }
 
     /**
      * Test of create method, of class ReportFolderService.
@@ -76,13 +85,8 @@ public class ReportFolderServiceTest {
     @Test
     public void testCreate() {
         System.out.println("create");
-        ReportFolder object = null;
-        ReportFolderService instance = new ReportFolderService();
-        ReportFolder expResult = null;
-        ReportFolder result = instance.create(object);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ReportFolder result = reportFolderService.create(mainReportFolder);
+        assertNotNull(result);
     }
 
     /**
@@ -91,13 +95,14 @@ public class ReportFolderServiceTest {
     @Test
     public void testUpdate() {
         System.out.println("update");
-        ReportFolder object = null;
-        ReportFolderService instance = new ReportFolderService();
-        ReportFolder expResult = null;
-        ReportFolder result = instance.update(object);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<ReportFolder> folders = reportFolderService.findAllRoots();
+        if (folders.size() > 0) {
+            String name = "Report name change";
+            mainReportFolder = folders.get(0);
+            mainReportFolder.setName(name);
+            ReportFolder result = reportFolderService.update(mainReportFolder);
+            assertEquals(result.getName(), name);
+        }
     }
-    
+
 }
