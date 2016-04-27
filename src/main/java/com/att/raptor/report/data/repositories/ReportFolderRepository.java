@@ -9,16 +9,20 @@ package com.att.raptor.report.data.repositories;
 
 import com.att.raptor.report.data.domain.ReportFolder;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * ReportFolderRepository - data access layer interface
  * @author ebrimatunkara
  */
-
 public interface ReportFolderRepository extends MongoRepository<ReportFolder,String>, 
                                                 DataRepositoryCustom<ReportFolder, String> {
     List<ReportFolder> findByParentId(String parentId);
     List<ReportFolder> findByParentIdNotNull();
     List<ReportFolder> findByParentIdNull();
+    Page<ReportFolder> findByParentId(String parentId, Pageable page);
+    Page<ReportFolder> findByParentIdNotNull(Pageable page);
+    Page<ReportFolder> findByParentIdNull(Pageable page);
 }

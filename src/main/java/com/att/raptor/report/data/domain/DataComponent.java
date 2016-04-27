@@ -31,6 +31,11 @@ public abstract class DataComponent extends Audit implements Serializable{
     **/
     @NotNull
     private String name;
+    
+    /**
+     * Description
+     **/
+    private String description;
 
     public DataComponent() {
     }
@@ -59,6 +64,14 @@ public abstract class DataComponent extends Audit implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

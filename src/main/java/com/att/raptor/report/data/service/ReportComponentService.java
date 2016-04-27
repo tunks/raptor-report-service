@@ -11,11 +11,14 @@ import com.att.raptor.report.data.domain.ReportComponent;
 import java.util.List;
 import javax.annotation.Resource;
 import com.att.raptor.report.data.repositories.ReportComponentRepository;
+import com.att.raptor.report.data.support.ReportComponentType;
+import org.springframework.stereotype.Service;
 
 /**
  * Report Component Service
  * @author ebrimatunkara
  */
+@Service("reportComponentService")
 public class ReportComponentService implements CrudBaseService<ReportComponent,String> {
     @Resource
     ReportComponentRepository reportComponentRepository;
@@ -24,7 +27,26 @@ public class ReportComponentService implements CrudBaseService<ReportComponent,S
     public List<ReportComponent> findAll() {
         return reportComponentRepository.findAll();
     }
-
+    
+    /***
+     * find by template id
+     * @param templateId
+     * @return  
+     */
+    public List<ReportComponent> findByTemplateId(String templateId){
+       return reportComponentRepository.findByTemplateId(templateId);
+    }
+    
+    /**
+     * find by template id and component type
+     * @param templateId
+     * @param type
+     * @return 
+     **/
+    public List<ReportComponent> findByTemplateIdAnd(String templateId, ReportComponentType type){
+      return reportComponentRepository.findByTemplateIdAndReportComponentType(templateId, type);
+    }
+    
     @Override
     public ReportComponent find(String id) {
         return reportComponentRepository.findOne(id);
@@ -38,6 +60,11 @@ public class ReportComponentService implements CrudBaseService<ReportComponent,S
     @Override
     public ReportComponent update(ReportComponent component) {
        return reportComponentRepository.update(component);
+    }
+
+    @Override
+    public void delete(String id) {
+        reportComponentRepository.delete(id);
     }
     
 }

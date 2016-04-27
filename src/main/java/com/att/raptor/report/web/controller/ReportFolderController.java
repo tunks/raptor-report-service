@@ -8,13 +8,21 @@
 package com.att.raptor.report.web.controller;
 
 import com.att.raptor.report.data.domain.ReportFolder;
+import com.att.raptor.report.data.domain.ReportFolderProjection;
 import com.att.raptor.report.data.service.ReportFolderService;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.projection.ProjectionFactory;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,8 +45,8 @@ public class ReportFolderController implements ControllerBase<ReportFolder> {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<ReportFolder> findAll(@RequestParam(value="parentId", required=false) String parentId) {
-        return reportFolderService.findAll();
+    public Page<?> findAll(@RequestParam(value="parentId", required=false) String parentId,Pageable page) {
+        return reportFolderService.findAllRoots(page);
     }
 
     @Override
@@ -53,14 +61,15 @@ public class ReportFolderController implements ControllerBase<ReportFolder> {
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
     @Override
-    public ReportFolder create(ReportFolder object) {
+    public ReportFolder create( @RequestBody ReportFolder object) {
         return reportFolderService.create(object);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     @Override
-    public ReportFolder update(ReportFolder object) {
+    public ReportFolder update( @RequestBody ReportFolder object) {
         return reportFolderService.update(object);
     }
 }

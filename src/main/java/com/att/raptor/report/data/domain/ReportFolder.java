@@ -7,6 +7,7 @@
  */
 package com.att.raptor.report.data.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -38,15 +39,19 @@ public class ReportFolder extends DataComponent {
     private List<ReportTemplate> reportTemplates;
 
     public ReportFolder() {
+        reportTemplates = new ArrayList();
+        subFolders = new ArrayList();
     }
 
     public ReportFolder(String name) {
         super(name);
+        initialize();
     }
 
     public ReportFolder(String name, String parentId) {
         super(name);
         this.parentId = parentId;
+        initialize();
     }
 
     public String getParentId() {
@@ -71,6 +76,19 @@ public class ReportFolder extends DataComponent {
 
     public void setReportTemplates(List<ReportTemplate> reportTemplates) {
         this.reportTemplates = reportTemplates;
+    }
+    
+    public void addReportFolder(ReportFolder folder){
+       subFolders.add(folder);
+    }
+    
+    public void addReportTemplate(ReportTemplate template){
+       reportTemplates.add(template);
+    }
+    
+    private void initialize(){
+        reportTemplates = new ArrayList();
+        subFolders = new ArrayList();
     }
 
 }

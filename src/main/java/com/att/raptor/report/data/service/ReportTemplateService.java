@@ -11,11 +11,13 @@ import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.data.repositories.ReportTemplateRepository;
 import java.util.List;
 import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 /**
  * Report Template service
  * @author ebrimatunkara
  */
+@Service("reportTemplateService")
 public class ReportTemplateService implements CrudBaseService<ReportTemplate,String>{
     @Resource
     ReportTemplateRepository reportTemplateRepository;
@@ -38,6 +40,11 @@ public class ReportTemplateService implements CrudBaseService<ReportTemplate,Str
     @Override
     public ReportTemplate update(ReportTemplate template) {
           return reportTemplateRepository.update(template);
+    }
+
+    @Override
+    public void delete(String id) {
+        reportTemplateRepository.delete(id);
     }
     
 }

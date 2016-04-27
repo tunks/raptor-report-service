@@ -11,6 +11,8 @@ import com.att.raptor.report.data.domain.ReportFolder;
 import com.att.raptor.report.data.repositories.ReportFolderRepository;
 import java.util.List;
 import javax.annotation.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,6 +29,10 @@ public class ReportFolderService implements CrudBaseService<ReportFolder,String>
         return reportFolderRepository.findAll();
     }
 
+    public Page<ReportFolder> findAll(Pageable page) {
+        return reportFolderRepository.findAll(page);
+    }
+    
     @Override
     public ReportFolder find(String id) {
            return reportFolderRepository.findOne(id);
@@ -42,7 +48,16 @@ public class ReportFolderService implements CrudBaseService<ReportFolder,String>
        return reportFolderRepository.update(object);
     }
 
-    List< ReportFolder> findAllRoots() {
+    public List< ReportFolder> findAllRoots() {
         return reportFolderRepository.findByParentIdNull();
+    }
+    
+    public Page< ReportFolder> findAllRoots(Pageable page) {
+         return reportFolderRepository.findByParentIdNull(page);
+    }
+
+    @Override
+    public void delete(String id) {
+        reportFolderRepository.delete(id);
     }
 }

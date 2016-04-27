@@ -1,12 +1,14 @@
 /**
  * Raptor Reporting service
- * A simple reporing service that enable users to design and generate web-based reports.
+ * A simple reporting service that enable users to design and generate web-based reports.
  * Built on top of the JasperReports - an open source reporting library
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
 package com.att.raptor.report.data.domain;
 
+import com.att.raptor.report.data.support.CustomDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.domain.Auditable;
@@ -16,7 +18,6 @@ import org.springframework.data.domain.Auditable;
  * domain objects
  */
 public abstract class Audit implements Auditable<String, String> {
-
     /**
      *
      */
@@ -25,8 +26,12 @@ public abstract class Audit implements Auditable<String, String> {
     private Long version;
 
     private String createdBy;
-    private DateTime createdDate;
     private String lastModifiedBy;
+    
+    @JsonSerialize(using = CustomDateSerializer.class)
+    private DateTime createdDate;
+    
+    @JsonSerialize(using = CustomDateSerializer.class)
     private DateTime lastModifiedDate;
 
     public Long getVersion() {

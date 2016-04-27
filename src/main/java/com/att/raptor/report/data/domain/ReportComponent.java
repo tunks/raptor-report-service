@@ -19,12 +19,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ReportComponent extends DataComponent {
     private ReportComponentType  reportComponentType;
     
-    private Set<DataComponent> reportComponents;
-   
+    private Set<ReportField> fieldComponents;
+    
+    private String templateId;
+    
     public ReportComponent() {
         super();
     }
-
+  
     public ReportComponent(String name) {
         super(name);
     }
@@ -32,18 +34,22 @@ public class ReportComponent extends DataComponent {
     public ReportComponent(String id, String name) {
         super(id, name);
     }
+    
+    public ReportComponent(ReportComponentType reportComponentType) {
+        this.reportComponentType = reportComponentType;
+    }
 
     public ReportComponent( String id, String name,ReportComponentType reportComponentType) {
         super(id, name);
         this.reportComponentType = reportComponentType;
     }
    
-    public Set<DataComponent> getReportComponents() {
-        return reportComponents;
+    public Set<ReportField> getFieldComponents() {
+        return fieldComponents;
     }
 
-    public void setReportComponents(Set<DataComponent> reportComponents) {
-        this.reportComponents = reportComponents;
+    public void setFieldComponents(Set<ReportField> fieldComponents) {
+        this.fieldComponents = fieldComponents;
     }
 
     public ReportComponentType getReportComponentTypeType() {
@@ -53,4 +59,12 @@ public class ReportComponent extends DataComponent {
     public void setReportComponentType(ReportComponentType reportComponentType) {
         this.reportComponentType = reportComponentType;
     } 
+
+    public String getTemplateId() {
+        return templateId;
+    }
+
+    public void setTemplateId(String templateId) {
+        this.templateId = templateId;
+    }
 }

@@ -50,14 +50,14 @@ public class ReportTemplateRepositoryTest {
     public void setUp() throws Exception {
         reportComponents = new HashSet();
         ReportComponent reportComponent = new ReportComponent();
-        Set<DataComponent> component = new HashSet();
+        Set<ReportField> component = new HashSet();
 
         ReportField rfield1 = new ReportField(null, "field1", DataFieldType.STRING);
         ReportField customField1 = new ReportField("Sum Total", DataFieldType.STRING,FieldAggregateType.SUM);
 
         component.add(rfield1);
         component.add(customField1);
-        reportComponent.setReportComponents(component);
+        reportComponent.setFieldComponents(component);
         reportComponents.add(reportComponent);
     }
 

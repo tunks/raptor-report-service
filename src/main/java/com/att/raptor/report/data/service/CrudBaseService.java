@@ -20,4 +20,5 @@ public interface CrudBaseService<T,ID> {
     public T find(ID id);
     public T create(T t);
     public T update(T t);
+    public void delete(ID id);
 }

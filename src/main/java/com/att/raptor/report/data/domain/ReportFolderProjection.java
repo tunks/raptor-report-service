@@ -5,17 +5,17 @@
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
-package com.att.raptor.report.data.projections;
+package com.att.raptor.report.data.domain;
 
-import com.att.raptor.report.data.domain.ReportFolder;
-import com.att.raptor.report.data.domain.ReportTemplate;
 import java.util.List;
+import org.springframework.data.rest.core.config.Projection;
 
 /**
  * Reports folder projections
  * @author ebrimatunkara
  */
-public interface ReportFolderExcerpt {
+@Projection(name = "inlineAddress", types = { ReportFolder.class }) 
+public interface ReportFolderProjection {
      public String getId();
      public String getParentId();
      public String getName();

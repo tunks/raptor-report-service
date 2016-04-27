@@ -20,6 +20,10 @@ public class ReportField extends DataField{
      **/
     private String description;
     /**
+     * Field Model name
+     */
+    private String modelName;
+    /**
      * Field label
      */
     private String label;
@@ -101,5 +105,13 @@ public class ReportField extends DataField{
 
     public void setFieldArgument(ReportArgumentField fieldArgument) {
         this.fieldArgument = fieldArgument;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 }

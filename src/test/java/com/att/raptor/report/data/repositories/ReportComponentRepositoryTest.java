@@ -11,6 +11,7 @@ import com.att.raptor.report.data.domain.DataComponent;
 import com.att.raptor.report.data.domain.ReportComponent;
 import com.att.raptor.report.data.domain.ReportField;
 import com.att.raptor.report.data.support.DataFieldType;
+import com.att.raptor.report.data.support.ReportComponentType;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.Resource;
@@ -49,11 +50,12 @@ public class ReportComponentRepositoryTest {
     
     @Before
     public void setUp() {
-        reportComponent = new ReportComponent();
-        Set<DataComponent> component = new HashSet();
+        reportComponent = new ReportComponent(ReportComponentType.TABLE);
+        Set<ReportField> component = new HashSet();
         ReportField  rfield1 = new ReportField(null,"field1",DataFieldType.STRING); 
+        rfield1.setModelName("plane");
         component.add(rfield1);
-        reportComponent.setReportComponents(component);
+        reportComponent.setFieldComponents(component);
     }
     
     @After

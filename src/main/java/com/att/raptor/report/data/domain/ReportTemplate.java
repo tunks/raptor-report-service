@@ -8,6 +8,7 @@
 package com.att.raptor.report.data.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -35,15 +36,18 @@ public class ReportTemplate extends Template implements Serializable {
 
     public ReportTemplate() {
         super();
+        initialize();
     }
 
     public ReportTemplate(String name) {
         super(name);
+        initialize();
     }
 
     public ReportTemplate(String name, String parentId) {
         super(name);
         this.parentId = parentId;
+        initialize();
     }
 
     
@@ -63,4 +67,19 @@ public class ReportTemplate extends Template implements Serializable {
         this.components = components;
     }
 
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public void addComponent(ReportComponent component) {
+        components.add(component);
+    }
+    
+    private void initialize(){
+       components = new HashSet();
+    }
 }

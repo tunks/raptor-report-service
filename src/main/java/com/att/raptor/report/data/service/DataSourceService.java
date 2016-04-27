@@ -8,36 +8,79 @@
 package com.att.raptor.report.data.service;
 
 import com.att.raptor.report.data.domain.DataSource;
+import com.att.raptor.report.data.domain.DataSourceModel;
+import com.att.raptor.report.data.domain.DataSourceProperty;
 import com.att.raptor.report.data.repositories.DataSourceRepository;
+import com.att.raptor.report.engine.dao.JdbcDataDao;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author ebrimatunkara
  */
-public class DataSourceService implements CrudBaseService<DataSource,String>{
+@Service("datasourceService")
+public class DataSourceService implements CrudBaseService<DataSource, String> {
+
     @Resource
-    DataSourceRepository dataSourceRepository;
-    
+    private DataSourceRepository dataSourceRepository;
+    /**
+     * TODO Database access
+     */
+    @Autowired
+    private JdbcDataDao jdbcDatadao;
+
+    /**
+     * TODO --- Code refactoring
+     *
+     * @return 
+     *
+     */
     @Override
     public List<DataSource> findAll() {
-       return dataSourceRepository.findAll();
+        // return dataSourceRepository.findAll();
+        List<DataSource> sources = new ArrayList();
+        sources.add(mapDataSourceSchema());
+        return sources;
     }
 
     @Override
     public DataSource find(String id) {
-       return dataSourceRepository.findOne(id);
+        return dataSourceRepository.findOne(id);
     }
 
     @Override
     public DataSource create(DataSource t) {
-      return dataSourceRepository.save(t);
+        return dataSourceRepository.save(t);
     }
 
     @Override
     public DataSource update(DataSource t) {
         return dataSourceRepository.update(t);
     }
-    
+
+    @Override
+    public void delete(String id) {
+        dataSourceRepository.delete(id);
+    }
+
+    /**
+     * *
+     * TODO Map JDBC local database schema into Datasource repository collection
+     *
+     * @return
+     */
+    public DataSource mapDataSourceSchema() {
+        DataSourceProperty property = new DataSourceProperty();
+        property.setServerAddress("localhost");
+        DataSource source = new DataSource("localhost", property);
+        Set<DataSourceModel> models = jdbcDatadao.getModels();
+        source.setModels(models);
+        return source;
+    }
+
 }
