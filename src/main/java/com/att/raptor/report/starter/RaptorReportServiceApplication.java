@@ -2,13 +2,20 @@ package com.att.raptor.report.starter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @ImportResource("classpath:*application-context.xml")
-public class RaptorReportServiceApplication {
+public class RaptorReportServiceApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RaptorReportServiceApplication.class, args);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(RaptorReportServiceApplication.class);
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(RaptorReportServiceApplication.class, args);
+    }
 }

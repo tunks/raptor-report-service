@@ -5,14 +5,15 @@
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
-package com.att.raptor.report.engine.dao;
+package com.att.raptor.report.engine.service;
 
-import com.att.raptor.report.data.domain.DataSourceProperty;
+import com.att.raptor.report.data.domain.ReportTemplate;
+import com.att.raptor.report.data.repositories.ReportTemplateRepository;
 import com.att.raptor.report.engine.query.JdbcQueryHandler;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import com.att.raptor.report.engine.query.QueryHandler;
+import java.util.HashSet;
 import java.util.Set;
+import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,8 +24,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import java.util.HashSet;
-import com.att.raptor.report.engine.query.QueryHandler;
 
 /**
  *
@@ -32,11 +31,16 @@ import com.att.raptor.report.engine.query.QueryHandler;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:application-context.xml"})
-public class JdbcDataDaoTest {
+public class JasperReportServiceTest {
     @Autowired
-    private JdbcDataDao jdbcDatadao;
+    private JasperReportService jasperReportService;
+    @Resource
+    private ReportTemplateRepository reportTemplateRepository;
     
-    public JdbcDataDaoTest() {}
+    private QueryHandler handler;
+    
+    public JasperReportServiceTest() {
+    }
     
     @BeforeClass
     public static void setUpClass() {
@@ -48,6 +52,9 @@ public class JdbcDataDaoTest {
     
     @Before
     public void setUp() {
+           String templateId = "572197e3d4c6e23119db1b03";
+           ReportTemplate template = reportTemplateRepository.findOne(templateId);
+           handler = new JdbcQueryHandler(template);
     }
     
     @After
@@ -55,26 +62,16 @@ public class JdbcDataDaoTest {
     }
 
     /**
-     * Test of getModels method, of class JdbcDataDao.
-     * @throws java.sql.SQLException
+     * Test of generate method, of class JasperReportService.
      */
     @Test
-    public void testGetModels() throws SQLException {
-        System.out.println("get models");
-        Set result = jdbcDatadao.getModels();
-        System.out.println("result ... "+result);
-        assertTrue(result.size()> 0);
+    public void testGenerate() {
+        System.out.println("generate");
+        String type = "HTTP";
+        Object result = jasperReportService.generate(type, handler);
+        //System.out.println(result);
+        assertNotNull(result);
+
     }
-    /**
-     * Test of getResults method, of class JdbcDataDao.
-     */
-//    @Test
-//    public void testGetResults_DataQuery() { 
-//        System.out.println("getResults");
-//        QueryHandler query = new JdbcQueryHandler();
-//        List result = jdbcDatadao.getResults(query);
-//        System.out.println(" query results "+result);
-//        assertNotNull(result);
-//    }
     
 }

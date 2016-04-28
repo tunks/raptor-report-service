@@ -16,10 +16,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
  */
 public class ReportField extends DataField{
     /**
-     * Field description
-     **/
-    private String description;
-    /**
      * Field Model name
      */
     private String modelName;
@@ -64,25 +60,9 @@ public class ReportField extends DataField{
     
     public ReportField(String name, DataFieldType fieldType, String description, String label) {
         super(name, fieldType);
-        this.description = description;
         this.label = label;
     }
     
-    public ReportField(String name, DataFieldType fieldType,String description, String label, FieldAggregateType aggregateType) {
-        super(name, fieldType);
-        this.description = description;
-        this.label = label;
-        this.aggregateType = aggregateType;
-    }
-   
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getLabel() {
         return label;
     }

@@ -48,6 +48,12 @@ public abstract class DataComponent extends Audit implements Serializable{
         this.id = id;
         this.name = name;
     }
+
+    public DataComponent(String id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
     
     @Override
     public String getId() {

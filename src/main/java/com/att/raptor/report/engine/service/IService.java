@@ -5,19 +5,15 @@
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
-package com.att.raptor.report.engine.query;
+package com.att.raptor.report.engine.service;
 
-import java.util.Set;
+import com.att.raptor.report.engine.query.QueryHandler;
 
 /**
- * DataQueryHandler interface
+ * Query Service interface
  * @author ebrimatunkara
- * @param <T>
  * @param <R>
  */
-public interface DataQueryHandler<T,R> {
-      public R processQuery();
-      public T getQuery();
-      public String getQueryString();
-      public Set getFieldSet();
+public interface IService<R> {
+      public R query(QueryHandler handler);
 }

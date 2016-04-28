@@ -10,6 +10,7 @@ package com.att.raptor.report.engine.query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -39,4 +40,20 @@ public final class QueryUtils {
         }
         return list;
     }
+    
+     public static String collectionToString(Collection<String> collection){
+        if( collection == null){
+            return ""; 
+         }
+        
+         StringBuilder builder = new StringBuilder();
+         Iterator<String> itr = collection.iterator();
+         String seperator = "";
+         while(itr.hasNext()){
+             builder.append(seperator);
+             builder.append(itr.next());
+             seperator = ",";
+         }
+         return builder.toString();
+     }
 }

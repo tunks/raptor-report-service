@@ -31,7 +31,7 @@ import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.MetaDataAccessException;
 import org.springframework.stereotype.Component;
-import com.att.raptor.report.engine.query.DataQueryHandler;
+import com.att.raptor.report.engine.query.QueryHandler;
 
 /**
  * JDBCDataDao class- implementation of the BaseDao This data source access
@@ -74,12 +74,12 @@ public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<DataSourcePro
      * @param queryHandler
      */
     @Override
-    public List getResults(DataQueryHandler queryHandler) {
+    public List getResults(QueryHandler queryHandler) {
         return getJdbcTemplate().execute(queryHandler.getQueryString(), new DataListPreparedStatement(queryHandler));
     }
 
     @Override
-    public List getResults(DataSourceProperty t, DataQueryHandler query) {
+    public List getResults(DataSourceProperty t, QueryHandler query) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -115,12 +115,12 @@ public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<DataSourcePro
     }
 
     public class DataListPreparedStatement implements PreparedStatementCallback<List> {
-        DataQueryHandler queryHandler;
+        QueryHandler queryHandler;
 
         public DataListPreparedStatement() {
         }
 
-        public DataListPreparedStatement(DataQueryHandler queryHandler) {
+        public DataListPreparedStatement(QueryHandler queryHandler) {
             this.queryHandler = queryHandler;
         }
         

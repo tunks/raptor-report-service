@@ -116,7 +116,8 @@ public class ReportTemplateController implements ControllerBase<ReportTemplate>{
            
            //add result to template
            template.addComponent(result);
-           
+           //update template
+           reportTemplateService.update(template);
            return result;
     }
     

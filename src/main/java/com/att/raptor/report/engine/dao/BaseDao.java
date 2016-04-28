@@ -7,9 +7,8 @@
  */
 package com.att.raptor.report.engine.dao;
 
-import java.util.List;
 import java.util.Set;
-import com.att.raptor.report.engine.query.DataQueryHandler;
+import com.att.raptor.report.engine.query.QueryHandler;
 
 /**
  * Report Engine Data Access Layer interface
@@ -36,7 +35,7 @@ public interface BaseDao<T,R>{
     * @param query
     * @return 
     */
-   public R getResults(DataQueryHandler query);
+   public R getResults(QueryHandler query);
    
    /**
     * Get results with query 
@@ -44,5 +43,5 @@ public interface BaseDao<T,R>{
     * @param query
     * @return 
     */
-   public R getResults(T t,  DataQueryHandler query);
+   public R getResults(T t,  QueryHandler query);
 }
