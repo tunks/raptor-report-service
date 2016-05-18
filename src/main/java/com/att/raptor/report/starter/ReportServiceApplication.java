@@ -8,14 +8,14 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @ImportResource("classpath:*application-context.xml")
-public class RaptorReportServiceApplication extends SpringBootServletInitializer {
+public class ReportServiceApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(RaptorReportServiceApplication.class);
+        return builder.sources(ReportServiceApplication.class);
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(RaptorReportServiceApplication.class, args);
+        SpringApplication.run(ReportServiceApplication.class, args);
     }
 }

@@ -1,6 +1,6 @@
 /**
  * Raptor Reporting service
- * A simple reporing service that enable users to design and generate web-based reports.
+ * A simple reporting service that enable users to design and generate web-based reports.
  * Built on top of the JasperReports - an open source reporting library
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
@@ -9,14 +9,12 @@ package com.att.raptor.report.data.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Report Folder repository -- contains a collection of templates and sub report
  * folders
- *
  * @author ebrimatunkara
  */
 @Document

@@ -8,6 +8,7 @@
 package com.att.raptor.report.data.domain;
 
 import com.att.raptor.report.data.support.ReportComponentType;
+import java.util.HashSet;
 import java.util.Set;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,7 +20,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ReportComponent extends DataComponent {
     private ReportComponentType  reportComponentType;
     
-    private Set<ReportField> fieldComponents;
+    private Set<ReportField> fieldComponents = new HashSet();
     
     private String templateId;
     

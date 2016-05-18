@@ -7,88 +7,58 @@
  */
 package com.att.raptor.report.engine.service;
 
-import ar.com.fdvs.dj.core.DynamicJasperHelper;
-import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
-import ar.com.fdvs.dj.domain.DynamicReport;
-import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
-import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
+import com.att.raptor.report.data.domain.ReportOutput;
 import com.att.raptor.report.data.domain.ReportTemplate;
+import com.att.raptor.report.data.domain.Template;
+import com.att.raptor.report.data.service.CrudBaseService;
 import com.att.raptor.report.engine.query.QueryHandler;
-import com.att.raptor.report.engine.support.IGenerator;
 import com.att.raptor.report.engine.support.JasperReportBuilder;
-import com.att.raptor.report.engine.support.JasperReportFactory;
-import java.util.Date;
-import java.util.HashMap;
+import com.att.raptor.report.engine.support.JasperScheduleReportAction;
+import com.att.raptor.report.engine.support.ReportBaseAction;
+import com.att.raptor.report.engine.support.ReportFormat;
+import com.att.raptor.report.engine.support.ReportUtils;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
- * ReportGenerator implementation
+ * JasperReportService implementation
  *
  * @author ebrimatunkara
  */
 @Service("jasperReportService")
-public class JasperReportService implements ReportService {
+public class JasperReportService implements ReportBaseService<ByteArrayOutputStream> {
     @Autowired
     private ReportQueryService reportQueryService;
-    private final JasperReportFactory factory = JasperReportFactory.CreateFactory();
+   
+    @Autowired
+    private  CrudBaseService reportOutputService;
+    @Value("${report.directory}")
+    private String fileDirectory;
+    
+    @Override
+    public ByteArrayOutputStream process(QueryHandler handler, ReportFormat format) {
+        JasperReportBuilder builder = new JasperReportBuilder();
+        List result = reportQueryService.query(handler);
+        Template template = handler.getTemplate();
+        JasperPrint jsPrinter = builder.build(handler.getTemplate(), result);
+        return ReportUtils.generateReport(jsPrinter, format, template.getId());
+    }
 
     @Override
-    public Object generate(String type, QueryHandler handler) {
-        try {
-            ReportBuilder builder = new ReportBuilder();
-            List result = reportQueryService.query(handler); //TestRepositoryProducts.getDummyCollection();//
-            JasperPrint jsPrinter =  builder.build(handler.getTemplate(), result);
-            IGenerator generator = factory.createGenerator(jsPrinter, type);
-            return generator.generate();
-        } catch (JRException ex) {
-            Logger.getLogger(JasperReportService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    public void process(QueryHandler handler) {
+        JasperReportBuilder builder = new JasperReportBuilder();
+        ReportTemplate template = handler.getTemplate();
+        List result = reportQueryService.query(handler);
+        JasperPrint jsPrinter = builder.build(template, result);
+        ReportBaseAction<ReportOutput> action =  new JasperScheduleReportAction (jsPrinter,fileDirectory,template.getName());
+        ReportOutput output = action.process(template.getId());
+        reportOutputService.create(output);
+        action.shutdown();
     }
 
-    private class ReportBuilder {
-        JasperReportBuilder  builder;
-       // FastReportBuilder builder;
-        private JasperReport jreport;
-        private Map params = new HashMap();
-
-        public ReportBuilder() {
-            builder = new JasperReportBuilder();
-        }
-
-        public JasperPrint build(ReportTemplate template, List data) throws JRException {
-            try {
-                DynamicReport report =  builder.prepare(template);
-                jreport = DynamicJasperHelper.generateJasperReport(report, new ClassicLayoutManager(), params);
-                return JasperFillManager.fillReport(jreport, params, prepareDataSource(data));
-            } catch (ColumnBuilderException ex) {
-                Logger.getLogger(JasperReportService.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return null;
-        }
-
-        private JRDataSource prepareDataSource(List data) {
-            return new JRBeanCollectionDataSource(data);
-        }
-
-        public Map getParams() {
-            return params;
-        }
-
-        public void setParams(Map params) {
-            this.params = params;
-        }
-
-    }
+    
 }

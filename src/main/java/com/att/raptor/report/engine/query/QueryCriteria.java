@@ -5,15 +5,12 @@
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
-package com.att.raptor.report.engine.support;
+package com.att.raptor.report.engine.query;
 
 /**
- *
+ * TODO
  * @author ebrimatunkara
- * @param <P>
- * @param <T>
  */
-public interface  ReportBaseFactory<P,T extends IGenerator> {
-    public T createGenerator(ReportFormat format);
-    public T createGenerator(P object, ReportFormat format);    
+public interface QueryCriteria {
+    
 }

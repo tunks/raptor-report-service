@@ -13,6 +13,7 @@ import com.att.raptor.report.data.domain.DataSourceProperty;
 import com.att.raptor.report.data.repositories.DataSourceRepository;
 import com.att.raptor.report.engine.dao.JdbcDataDao;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Resource;
@@ -81,6 +82,11 @@ public class DataSourceService implements CrudBaseService<DataSource, String> {
         Set<DataSourceModel> models = jdbcDatadao.getModels();
         source.setModels(models);
         return source;
+    }
+
+    @Override
+    public List<DataSource> create(Collection<DataSource> t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

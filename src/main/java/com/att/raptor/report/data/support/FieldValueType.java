@@ -8,16 +8,10 @@
 package com.att.raptor.report.data.support;
 
 /**
- * FieldArgumentType
+ * FieldValue type
  * @author ebrimatunkara
  */
-public enum FieldArgumentType {
-      EQUALS,
-      LESS_THAN,
-      LESS_THAN_EQUALS,
-      GREATER_THAN,
-      GREATER_THAN_EQUALS,
-      RANGE,
-      LIKE;
-      
+public enum FieldValueType {
+    DATA_FIELD_TYPE,
+    CUSTOM_TYPE;
 }

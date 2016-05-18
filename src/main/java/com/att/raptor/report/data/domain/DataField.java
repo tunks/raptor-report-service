@@ -8,6 +8,7 @@
 package com.att.raptor.report.data.domain;
 
 import com.att.raptor.report.data.support.DataFieldType;
+import java.util.Objects;
 
 /**
  * DataField Component extends DataComponent
@@ -15,6 +16,10 @@ import com.att.raptor.report.data.support.DataFieldType;
  */
 public class DataField extends DataComponent{
     private DataFieldType fieldType;
+        /**
+     * Field Model name
+     */
+    private String modelName;
     
     public DataField(){
     }
@@ -47,8 +52,10 @@ public class DataField extends DataComponent{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        return hash + super.hashCode();
+        int hash = 5;
+        hash = 67 * hash + ((this.modelName != null)? Objects.hashCode(this.modelName) : 0);
+        hash = 67 * hash + ((this.getName() != null)? Objects.hashCode(this.getName()) : 0);
+        return hash;
     }
 
     @Override
@@ -63,13 +70,34 @@ public class DataField extends DataComponent{
             return false;
         }
         final DataField other = (DataField) obj;
-        return this.fieldType == other.fieldType && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()));
+        
+        if(this.modelName == null || other.modelName == null){
+           return false;
+        }
+        
+       if(this.getName() == null || other.getName() == null){
+           return false;
+        }
+       
+        if (!Objects.equals(this.modelName, other.modelName)) {
+            return false;
+        }
+        return this.getName().equals(other.getName());
     }
 
+
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    
     @Override
     public String toString() {
         return "DataField{" + "fieldType=" + fieldType + ", "+super.toString()+"}" ;
-    }
-    
-    
+    }    
 }

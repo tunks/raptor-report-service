@@ -29,7 +29,6 @@ public abstract class DataComponent extends Audit implements Serializable{
    /**
     * Name of the data component
     **/
-    @NotNull
     private String name;
     
     /**

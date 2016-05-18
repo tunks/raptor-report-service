@@ -14,7 +14,7 @@ import net.sf.jasperreports.engine.JasperPrint;
  * @author ebrimatunkara
  * @param <T>
  */
-public abstract class JasperGenerator<T> implements IGenerator{
+public abstract class JasperGenerator<T> implements IGenerator<T>{
      private JasperPrint jsPrint;
      
      public JasperGenerator(JasperPrint jsPrint){

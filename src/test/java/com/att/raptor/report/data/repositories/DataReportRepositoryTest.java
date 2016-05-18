@@ -49,7 +49,6 @@ public class DataReportRepositoryTest {
     @After
     public void tearDown() {
     }
-
    /**
     * Save DataReport without report template
     * 

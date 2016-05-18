@@ -1,6 +1,6 @@
 /**
  * Raptor Reporting service
- * A simple reporing service that enable users to design and generate web-based reports.
+ * A simple reporting service that enable users to design and generate web-based reports.
  * Built on top of the JasperReports - an open source reporting library
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
@@ -16,19 +16,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
+ * JDBCQuery Handler class - this handler class prepares and creates the jdbc query arguments,statements
  * @author ebrimatunkara
  */
 public class JdbcQueryHandler extends QueryHandler<PreparedStatement, List> {
     private Set<String> modelSet;
     private Set<String> fieldSets;
     public JdbcQueryHandler() {
-        this.modelSet = new HashSet();
+        modelSet = new HashSet();
     }
 
     public JdbcQueryHandler(ReportTemplate template) {
         super(template);
-        this.modelSet = new HashSet();
+        modelSet = new HashSet();
         fieldSets = createFieldSets(template);
     }
    

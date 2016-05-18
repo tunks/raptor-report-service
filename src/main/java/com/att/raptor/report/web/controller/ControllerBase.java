@@ -1,16 +1,13 @@
-/*
- * Project name: Archive Rest service
- * A simple Rest service to archive data in MongoDB and index data in Apache Solr for  dynamic search queries 
- * 2016 © ATT Service Assurance  - Raptor POC team 
+/**
+ * Raptor Reporting service
+ * A simple reporting service that enable users to design and generate web-based reports.
+ * Built on top of the JasperReports - an open source reporting library
+ * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
 package com.att.raptor.report.web.controller;
 
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * ControllerBase abstract class 
@@ -38,11 +35,13 @@ public interface ControllerBase<T> {
     /**
      * Request method to create resource  
      * @param object
+     * @return 
      **/
     public T create(T object);
     /**
      * Request method to update resource
      * @param object
+     * @return 
      **/
     public T update(T object);
 }

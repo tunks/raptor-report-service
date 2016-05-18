@@ -13,29 +13,32 @@ import net.sf.jasperreports.engine.JasperPrint;
  *
  * @author ebrimatunkara
  */
-public class JasperReportFactory implements ReportBaseFactory<JasperPrint, JasperGenerator>{
+public class JasperReportFactory implements ReportBaseFactory<JasperPrint, JasperGenerator> {
 
     @Override
-    public JasperGenerator createGenerator(String type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public JasperGenerator createGenerator(ReportFormat format) {
+      return createGenerator(null,format);
     }
 
     @Override
-    public JasperGenerator createGenerator(JasperPrint object, String type) {
-         switch(type){
-             case "xls":
-             case "xlsx":
-                  return new XlsxGenerator(object);
-             case "pdf":
-                  return new PdfGenerator(object);
-             default:
-                  return new HtmlGenerator(object);
-         }
-         
+    public JasperGenerator createGenerator(JasperPrint object, ReportFormat format) {
+        switch (format) {
+            case XLSX:
+                return new XlsxGenerator(object);
+            case PDF:
+                return new PdfGenerator(object);
+            default:
+                return new HtmlGenerator(object);
+        }
+
     }
     
-    public static JasperReportFactory CreateFactory(){
-         return new JasperReportFactory();
+   public static JasperGenerator createNewGenerator(JasperPrint object, ReportFormat format) {
+           return CreateFactory().createGenerator(object, format);
     }
 
+    public static JasperReportFactory CreateFactory() {
+        return new JasperReportFactory();
+    }
+    
 }

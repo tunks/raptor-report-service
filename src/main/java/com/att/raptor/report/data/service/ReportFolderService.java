@@ -9,6 +9,7 @@ package com.att.raptor.report.data.service;
 
 import com.att.raptor.report.data.domain.ReportFolder;
 import com.att.raptor.report.data.repositories.ReportFolderRepository;
+import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.domain.Page;
@@ -59,5 +60,10 @@ public class ReportFolderService implements CrudBaseService<ReportFolder,String>
     @Override
     public void delete(String id) {
         reportFolderRepository.delete(id);
+    }
+
+    @Override
+    public List<ReportFolder> create(Collection<ReportFolder> t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

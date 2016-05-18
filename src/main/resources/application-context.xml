@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:lang="http://www.springframework.org/schema/lang"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
     <!--  load context properties -->
-    <context:property-placeholder location="classpath:application.properties" ignore-unresolvable="true" />
+    <context:property-placeholder location="classpath:application.properties"  />
    
     <!-- import the bean configuration files -->
     <import resource="spring-mongo-config.xml"/>
     <import resource="spring-jdbc-config.xml" />
     
+    <!-- scan  report engine services  -->
+    <context:component-scan base-package="com.att.raptor.report.engine.service" /> 
     <!-- scan  web controllers -->
     <context:component-scan base-package="com.att.raptor.report.web.controller" /> 
+    <!-- scan support component beans -->
+    <context:component-scan base-package="com.att.raptor.report.engine.support" /> 
     
-    <!-- data object projections factory -->
-    <bean id="projectionFactory" class="org.springframework.data.projection.SpelAwareProxyProjectionFactory" />
+    <bean id="reportHtmlContent" class="java.lang.String">
+        <constructor-arg>
+            <bean class="org.springframework.util.FileCopyUtils" factory-method="copyToByteArray">
+                <constructor-arg value="classpath:templates/report-mail.html" type="java.io.InputStream" />
+            </bean>     
+        </constructor-arg>
+    </bean>
+    
 </beans>

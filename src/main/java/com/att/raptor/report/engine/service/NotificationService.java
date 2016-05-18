@@ -7,13 +7,11 @@
  */
 package com.att.raptor.report.engine.service;
 
-import com.att.raptor.report.engine.query.QueryHandler;
-
 /**
- *
+ * Notification service interface
  * @author ebrimatunkara
  * @param <T>
  */
-public interface ReportService<T>{
-    public T generate(String type , QueryHandler handler);
+public interface NotificationService<T>{
+    public void send(T message);
 }

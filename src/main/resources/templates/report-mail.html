@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div style="border: medium solid gray;padding: 10px;">
+            <div style="padding:10px;text-align: center;"><h3>AT&T Reports</h3></div>
+            <div style="background-color: #dde;border-bottom: 1px silver;padding:10px;">
+                 <h4 style="display: inline;width: 60%"><span>${title} </span></h4>
+                  <span style="font-style: italic;display: inline;float: right;"> Generated on ${createdOn}</span>
+            </div>
+            <div style="padding:10px;">
+                <span style="font-weight: bold;padding-right: 20px;">Download report formats</span>
+                <ul>
+                     <li style="padding-left:10px;display: inline-block;list-style: none">
+                        <a href="${link:html}"> HTML</a>
+                    </li> 
+                    <li style="padding-left:10px;display: inline-block;list-style: none">
+                        <a href="${link:pdf}"> PDF</a>
+                    </li> 
+                    <li style= "padding-left:10px;display: inline-block;list-style: none">
+                        <a href="${link:xlsx}" >XLSX</a>
+                    </li>
+                </ul>
+            </div>
+            <div>${embeded:html}</div>
+            <footer><div style="padding:10px;border-top:1px solid gray;">2016  © AT&T Reports Platform</div></footer>
+        </div>
+    </body>
+</html>

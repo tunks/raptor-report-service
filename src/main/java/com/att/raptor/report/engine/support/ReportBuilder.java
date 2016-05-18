@@ -5,22 +5,16 @@
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
-package com.att.raptor.report.data.service;
+package com.att.raptor.report.engine.support;
 
-import java.util.Collection;
+import com.att.raptor.report.data.domain.ReportTemplate;
 import java.util.List;
 
-/**
- *
+/** 
+ * Report Builder interface
  * @author ebrimatunkara
  * @param <T>
- * @param <ID>
  */
-public interface CrudBaseService<T,ID> {
-    public List<T> findAll();
-    public T find(ID id);
-    public T create(T t);
-    public List<T> create(Collection<T> t);
-    public T update(T t);
-    public void delete(ID id);
+public interface ReportBuilder <T>{
+    public T build(ReportTemplate template, List data);
 }

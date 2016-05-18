@@ -21,14 +21,14 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
  * XLSX Generator -- implementation
  * @author ebrimatunkara
  */
-public class XlsxGenerator extends JasperGenerator {
+public class XlsxGenerator extends JasperGenerator<ByteArrayOutputStream> {
 
     public XlsxGenerator(JasperPrint jsPrint) {
         super(jsPrint);
     }
 
     @Override
-    public Object generate() {
+    public ByteArrayOutputStream generate() {
         try {
             JRXlsExporter exporter = new JRXlsExporter();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

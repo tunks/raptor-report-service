@@ -1,6 +1,6 @@
 /**
  * Raptor Reporting service
- * A simple reporing service that enable users to design and generate web-based reports.
+ * A simple reporting service that enable users to design and generate web-based reports.
  * Built on top of the JasperReports - an open source reporting library
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
@@ -9,10 +9,10 @@ package com.att.raptor.report.web.controller;
 
 import com.att.raptor.report.data.domain.ReportComponent;
 import com.att.raptor.report.data.service.ReportComponentService;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,10 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/att/reports/templates/components")
 public class ReportComponentController implements ControllerBase<ReportComponent>{
-       
+    @Autowired
+    private ReportComponentService reportComponentService;
+    
+    @RequestMapping(value="/{id}", method= RequestMethod.GET)
     @Override
-    public ReportComponent find(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ReportComponent find(@PathVariable String id) {
+       return reportComponentService.find(id);
     }
 
     @Override
@@ -33,19 +36,22 @@ public class ReportComponentController implements ControllerBase<ReportComponent
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @RequestMapping(value="/{id}", method= RequestMethod.DELETE)
     @Override
     public void delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       reportComponentService.delete(id);
     }
 
+    @RequestMapping(method= RequestMethod.POST)
     @Override
     public ReportComponent create(ReportComponent object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return reportComponentService.create(object);
     }
-
+    
+    @RequestMapping(method= RequestMethod.PUT)
     @Override
     public ReportComponent update(ReportComponent object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return reportComponentService.update(object);
     }
     
 }

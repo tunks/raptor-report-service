@@ -8,6 +8,8 @@ package com.att.raptor.report.data.domain;
 
 import com.att.raptor.report.data.support.DataFieldType;
 import com.att.raptor.report.data.support.FieldAggregateType;
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /**
@@ -15,10 +17,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
  * @author ebrimatunkara
  */
 public class ReportField extends DataField{
-    /**
-     * Field Model name
-     */
-    private String modelName;
+
     /**
      * Field label
      */
@@ -28,25 +27,25 @@ public class ReportField extends DataField{
      * Report Field Aggregate type
      **/
     private FieldAggregateType aggregateType;
-    /**
-     * Report field argument - stores the argument for a report field
-     */
-    @DBRef
-    private ReportArgumentField  fieldArgument;
+
+    private Set<ReportArgumentField>  fieldArguments;
     
     /**
      * TODO - report field style 
      **/
     
     public ReportField() {
+      initialize();
     }
 
     public ReportField(String name) {
         super(name);
+         initialize();
     }
 
     public ReportField(String id, String name) {
         super(id, name);
+        initialize();
     }
 
     public ReportField(String id, String name, DataFieldType fieldType) {
@@ -56,11 +55,13 @@ public class ReportField extends DataField{
     public ReportField( String name, DataFieldType fieldType, FieldAggregateType aggregateType) {
         super(name, fieldType);
         this.aggregateType = aggregateType;
+        initialize();
     }
     
     public ReportField(String name, DataFieldType fieldType, String description, String label) {
         super(name, fieldType);
         this.label = label;
+        initialize();
     }
     
     public String getLabel() {
@@ -79,19 +80,15 @@ public class ReportField extends DataField{
         this.aggregateType = aggregateType;
     }
 
-    public ReportArgumentField getFieldArgument() {
-        return fieldArgument;
+    public Set<ReportArgumentField> getFieldArguments() {
+        return fieldArguments;
     }
 
-    public void setFieldArgument(ReportArgumentField fieldArgument) {
-        this.fieldArgument = fieldArgument;
+    public void setFieldArguments(Set<ReportArgumentField> fieldArguments) {
+        this.fieldArguments = fieldArguments;
     }
-
-    public String getModelName() {
-        return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
+    
+    private void initialize(){
+       this.fieldArguments = new HashSet();
     }
 }

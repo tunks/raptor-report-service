@@ -7,13 +7,14 @@
  */
 package com.att.raptor.report.engine.support;
 
+import com.att.raptor.report.data.service.CrudBaseService;
+
 /**
- *
+ * Report Action interface
  * @author ebrimatunkara
- * @param <P>
  * @param <T>
  */
-public interface  ReportBaseFactory<P,T extends IGenerator> {
-    public T createGenerator(ReportFormat format);
-    public T createGenerator(P object, ReportFormat format);    
+public interface ReportBaseAction<T> {
+     public <T> T process(String templateId);
+     public void shutdown();
 }

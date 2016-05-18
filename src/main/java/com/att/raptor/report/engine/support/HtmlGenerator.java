@@ -20,13 +20,13 @@ import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
  * Customer jasper  - HTMLGenerator implementation 
  * @author ebrimatunkara
  */
-public class HtmlGenerator extends JasperGenerator{
+public class HtmlGenerator extends JasperGenerator<ByteArrayOutputStream>{
     public HtmlGenerator(JasperPrint jsPrint) {
         super(jsPrint);
     }
 
     @Override
-    public Object generate() {
+    public ByteArrayOutputStream generate() {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             HtmlExporter exporter = new HtmlExporter();

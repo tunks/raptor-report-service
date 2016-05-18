@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import com.att.raptor.report.data.repositories.ReportComponentRepository;
 import com.att.raptor.report.data.support.ReportComponentType;
+import java.util.Collection;
 import org.springframework.stereotype.Service;
 
 /**
@@ -65,6 +66,11 @@ public class ReportComponentService implements CrudBaseService<ReportComponent,S
     @Override
     public void delete(String id) {
         reportComponentRepository.delete(id);
+    }
+
+    @Override
+    public List<ReportComponent> create(Collection<ReportComponent> t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
