@@ -7,7 +7,6 @@
  */
 package com.att.raptor.report.engine.support;
 
-import com.att.raptor.report.data.domain.ReportOutput;
 import com.att.raptor.report.data.domain.ReportOutputFile;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

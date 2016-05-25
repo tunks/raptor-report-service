@@ -124,9 +124,14 @@ public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<DataSourcePro
             this.queryHandler = queryHandler;
         }
         
+        /**
+         * Extract the result list
+         * return List
+         * @throws java.sql.SQLException
+         **/
         @Override
         public List doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {           
-            return QueryUtils.extractArticleListFromRs(ps.executeQuery(),queryHandler.getFieldSet());
+            return QueryUtils.extractListFromRs(ps.executeQuery(),queryHandler.getFieldSet());
         }
     }
 }

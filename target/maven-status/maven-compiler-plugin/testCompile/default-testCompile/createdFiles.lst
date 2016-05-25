@@ -4,5 +4,6 @@ com/att/raptor/report/data/repositories/ReportComponentRepositoryTest.class
 com/att/raptor/report/data/repositories/ReportFolderRepositoryTest.class
 com/att/raptor/report/data/repositories/DataSourceRepositoryTest.class
 com/att/raptor/report/data/service/ReportFolderServiceTest.class
+.netbeans_automatic_build
 com/att/raptor/report/data/repositories/DataReportRepositoryTest.class
 com/att/raptor/report/data/repositories/ReportTemplateRepositoryTest.class

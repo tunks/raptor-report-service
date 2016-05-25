@@ -14,6 +14,7 @@ import java.util.Objects;
  * DataField Component extends DataComponent
  * @author ebrimatunkara
  */
+
 public class DataField extends DataComponent{
     private DataFieldType fieldType;
         /**

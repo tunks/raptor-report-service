@@ -37,7 +37,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  * @author ebrimatunkara
  * JasperReportBuilder implementation -- implements ReportBuilder
  */
-public class JasperReportBuilder implements ReportBuilder<JasperPrint> {
+public class JasperReportBuilder implements ReportBuilder<JasperPrint,Set<String>> {
     private final FastReportBuilder builder;
     private JasperReport jreport;
     private Map params = new HashMap();
@@ -56,6 +56,11 @@ public class JasperReportBuilder implements ReportBuilder<JasperPrint> {
             Logger.getLogger(JasperReportBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    @Override
+    public JasperPrint build(ReportTemplate template, List data, Set<String> fieldset) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private JRDataSource prepareDataSource(List data) {
@@ -96,7 +101,9 @@ public class JasperReportBuilder implements ReportBuilder<JasperPrint> {
 
     protected List<AbstractColumn> createColumns(Set<ReportField> fields) {
         List<AbstractColumn> columns = new ArrayList();
+        
         for (ReportField field : fields) {
+            
             columns.add(createColumn(field));
         }
         return columns;
@@ -105,6 +112,7 @@ public class JasperReportBuilder implements ReportBuilder<JasperPrint> {
     private AbstractColumn createColumn(ReportField field) {
         String name = field.getName();
         DataFieldType dfieldType = field.getFieldType();
+        //TODO 
         String fType;
         if (dfieldType == null) {
             fType = String.class.getName();
@@ -112,13 +120,17 @@ public class JasperReportBuilder implements ReportBuilder<JasperPrint> {
             fType = dfieldType.getType();
         }
         ColumnBuilder cBuilder = ColumnBuilder.getNew();
-        cBuilder.setColumnProperty(field.getName(), fType);
-        cBuilder.setTitle(columnTitle(name));
+        cBuilder.setColumnProperty(name, DataFieldType.STRING.getType());
+        cBuilder.setTitle(columnTitle(field));
         return cBuilder.build();
     }
 
-    private String columnTitle(String fieldName) {
-        return fieldName;
+    /***
+     * Define column title
+     * Use the field label if it is available else use the field name
+     ***/
+    private String columnTitle( ReportField field) {
+        return (field.getLabel() != null && !field.getLabel().isEmpty())? field.getLabel(): field.getName();
     }
 
 }

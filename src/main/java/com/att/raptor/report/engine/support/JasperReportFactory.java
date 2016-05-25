@@ -7,6 +7,9 @@
  */
 package com.att.raptor.report.engine.support;
 
+import com.att.raptor.report.engine.query.ArgumentQueryParser;
+import com.att.raptor.report.engine.query.QueryParser;
+import com.att.raptor.report.engine.query.SimpleQueryParser;
 import net.sf.jasperreports.engine.JasperPrint;
 
 /**
@@ -39,6 +42,15 @@ public class JasperReportFactory implements ReportBaseFactory<JasperPrint, Jaspe
 
     public static JasperReportFactory CreateFactory() {
         return new JasperReportFactory();
+    }
+    
+    /**
+     * Create Query Parser
+     * @return 
+     **/
+    public static QueryParser createQueryParser(){
+        ArgumentQueryParser conParser = new ArgumentQueryParser();
+        return new SimpleQueryParser(conParser);
     }
     
 }

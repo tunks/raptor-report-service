@@ -15,17 +15,20 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author ebrimatunkara
  */
 @JsonInclude(Include.NON_NULL)
-public class ReportArgumentValue extends DataField{
+public class ReportArgumentValue{
     /*
      * FieldValue type 
      */
-    private FieldValueType valueType; 
-    
+    private FieldValueType valueType;
     /*
-      Argument value
+     * Argument custom value
      */
     private String  customValue;
-
+    /*
+     * Argument data field arguments
+     */
+    private DataField dataField;
+    
     public FieldValueType getValueType() {
         return valueType;
     }
@@ -40,7 +43,14 @@ public class ReportArgumentValue extends DataField{
 
     public void setCustomValue(String customValue) {
         this.customValue = customValue;
+    } 
+
+    public DataField getDataField() {
+        return dataField;
     }
-   
+
+    public void setDataField(DataField dataField) {
+        this.dataField = dataField;
+    }
 }
 

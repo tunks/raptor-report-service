@@ -10,37 +10,44 @@ import com.att.raptor.report.data.support.DataFieldType;
 import com.att.raptor.report.data.support.FieldAggregateType;
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
 /**
  * ReportFieldComponent -- that is contained in the ReportComponentGroup
+ *
  * @author ebrimatunkara
  */
-public class ReportField extends DataField{
+public class ReportField extends DataField {
 
     /**
      * Field label
      */
     private String label;
-    
+
     /**
      * Report Field Aggregate type
-     **/
+     *
+     */
     private FieldAggregateType aggregateType;
 
-    private Set<ReportArgumentField>  fieldArguments;
-    
+    private Set<ReportArgumentField> fieldArguments;
+
+    /*
+     *  Variables to indicate if the report field should not display
+     */
+    private boolean visible = true;
+
     /**
      * TODO - report field style 
-     **/
-    
+     *
+     */
+
     public ReportField() {
-      initialize();
+        initialize();
     }
 
     public ReportField(String name) {
         super(name);
-         initialize();
+        initialize();
     }
 
     public ReportField(String id, String name) {
@@ -52,25 +59,25 @@ public class ReportField extends DataField{
         super(id, name, fieldType);
     }
 
-    public ReportField( String name, DataFieldType fieldType, FieldAggregateType aggregateType) {
+    public ReportField(String name, DataFieldType fieldType, FieldAggregateType aggregateType) {
         super(name, fieldType);
         this.aggregateType = aggregateType;
         initialize();
     }
-    
+
     public ReportField(String name, DataFieldType fieldType, String description, String label) {
         super(name, fieldType);
         this.label = label;
         initialize();
     }
-    
+
     public String getLabel() {
         return label;
     }
 
     public void setLabel(String label) {
         this.label = label;
-    } 
+    }
 
     public FieldAggregateType getAggregateType() {
         return aggregateType;
@@ -87,8 +94,16 @@ public class ReportField extends DataField{
     public void setFieldArguments(Set<ReportArgumentField> fieldArguments) {
         this.fieldArguments = fieldArguments;
     }
-    
-    private void initialize(){
-       this.fieldArguments = new HashSet();
+
+    private void initialize() {
+        this.fieldArguments = new HashSet();
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

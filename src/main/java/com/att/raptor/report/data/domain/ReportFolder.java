@@ -19,7 +19,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 public class ReportFolder extends DataComponent {
-
     /**
      * Parent id
      *
@@ -88,5 +87,4 @@ public class ReportFolder extends DataComponent {
         reportTemplates = new ArrayList();
         subFolders = new ArrayList();
     }
-
 }

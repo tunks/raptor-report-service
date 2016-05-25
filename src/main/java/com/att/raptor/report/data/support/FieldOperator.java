@@ -12,13 +12,15 @@ package com.att.raptor.report.data.support;
  * @author ebrimatunkara
  */
 public enum FieldOperator {
-    EQUALS("=="),
+    EQUALS("="),
+    NOT_EQUALS("!="),
     LESS_THAN("<"),
     LESS_THAN_EQUALS("<="),
     GREATER_THAN(">"),
     GREATER_THAN_EQUALS(">="),
     LIKE("LIKE"),
-    GROUP_BY("GROUP BY");
+    IN("IN"),
+    JOIN("JOIN");
 
     private String operator;
 

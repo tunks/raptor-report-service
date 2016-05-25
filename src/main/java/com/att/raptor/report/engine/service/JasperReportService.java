@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * JasperReportService implementation
- *
  * @author ebrimatunkara
  */
 @Service("jasperReportService")
@@ -58,7 +57,5 @@ public class JasperReportService implements ReportBaseService<ByteArrayOutputStr
         ReportOutput output = action.process(template.getId());
         reportOutputService.create(output);
         action.shutdown();
-    }
-
-    
+    }    
 }

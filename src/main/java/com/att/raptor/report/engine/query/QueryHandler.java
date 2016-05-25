@@ -36,7 +36,7 @@ public abstract class QueryHandler<T, R> {
         this.template = template;
     }
 
-    public abstract R processQuery();
+    public abstract R parseQuery();
 
     public abstract T getQuery();
 

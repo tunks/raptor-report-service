@@ -11,9 +11,13 @@ import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.data.service.ReportTemplateService;
 import com.att.raptor.report.engine.query.JdbcQueryHandler;
 import com.att.raptor.report.engine.query.QueryHandler;
+import com.att.raptor.report.engine.query.QueryParser;
+import com.att.raptor.report.engine.support.JasperReportFactory;
+import com.att.raptor.report.engine.support.ReportFormat;
 import com.att.raptor.report.starter.ReportServiceApplication;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -39,6 +43,7 @@ public class JasperReportServiceTest {
 
     private QueryHandler handler;
 
+    private  ReportFormat format;
     public JasperReportServiceTest() {
     }
 
@@ -52,9 +57,11 @@ public class JasperReportServiceTest {
 
     @Before
     public void setUp() {
-        String templateId = "57224cc477c81fca3b334513";
+        String templateId = "5722328fd4c69551a9dcbb0f";// 5722328fd4c69551a9dcbb0f
         ReportTemplate template = reportTemplateService.find(templateId);
-        handler = new JdbcQueryHandler(template);
+        QueryParser  parser = JasperReportFactory.createQueryParser();
+        handler = new JdbcQueryHandler(template,parser);
+       format = ReportFormat.formatType("html");
     }
 
     @After
@@ -65,18 +72,17 @@ public class JasperReportServiceTest {
     /**
      * Test of generate method, of class JasperReportService.
      */
-    //@Test
+   // @Test
     public void testProcess() {
-//        System.out.println("generate");
-//        String type = "HTTP";
-//        Object result = jasperReportService.generate(type, handler);
-//        //System.out.println(result);
-//        assertNotNull(result);
+        System.out.println("generate");
+        Object result = jasperReportService.process(handler,format);
+        System.out.println(result);
+        assertNotNull(result);
     }
     
     @Test
     public void proccessAction(){
-        jasperReportService.process(handler);
+       // jasperReportService.process(handler);
     }
 }
 //

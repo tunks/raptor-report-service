@@ -7,16 +7,11 @@
  */
 package com.att.raptor.report.engine.support;
 
-import com.att.raptor.report.data.domain.ReportTemplate;
-import java.util.List;
-
-/** 
- * Report Builder interface
+/**
+ * FilterPredicate interface
  * @author ebrimatunkara
  * @param <T>
- * @param <V>
  */
-public interface ReportBuilder <T,V>{
-    public T build(ReportTemplate template, List data);
-    public T build(ReportTemplate template, List data, V fieldset);
+public interface FilterPredicate<T> {
+    public boolean filter(T object);
 }

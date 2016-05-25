@@ -12,7 +12,9 @@ import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.data.service.ReportOutputService;
 import com.att.raptor.report.data.service.ReportTemplateService;
 import com.att.raptor.report.engine.query.JdbcQueryHandler;
+import com.att.raptor.report.engine.query.QueryParser;
 import com.att.raptor.report.engine.service.JasperReportService;
+import com.att.raptor.report.engine.support.JasperReportFactory;
 import com.att.raptor.report.engine.support.ReportFormat;
 import com.att.raptor.report.engine.support.ReportRequest;
 import com.att.raptor.report.engine.support.ReportUtils;
@@ -54,7 +56,8 @@ public class ReportActionController {
     public ResponseEntity<?> processScheduleAction(@RequestBody ReportRequest request) {
         ReportTemplate template = reportTemplateService.find(request.getTemplateId());
         if (template != null) {
-            jasperReportService.process(new JdbcQueryHandler(template));
+            QueryParser  parser = JasperReportFactory.createQueryParser();
+            jasperReportService.process(new JdbcQueryHandler(template,parser));
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity<>("No such report available", HttpStatus.NOT_FOUND);
@@ -80,9 +83,9 @@ public class ReportActionController {
             /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
             //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
             response.setContentLength((int) file.length());
-            InputStream inputStream = new FileInputStream(file);
-
-            FileCopyUtils.copy(inputStream, response.getOutputStream());
+            try (InputStream inputStream = new FileInputStream(file)) {
+                FileCopyUtils.copy(inputStream, response.getOutputStream());
+            }
         }
     }
 }

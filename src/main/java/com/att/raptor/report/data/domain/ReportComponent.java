@@ -68,4 +68,16 @@ public class ReportComponent extends DataComponent {
     public void setTemplateId(String templateId) {
         this.templateId = templateId;
     }
+    
+    /*
+     * Boolean method to indicate if ReportComponent has field arguments in any of its field components
+     */
+    public boolean hasArgumentFields(){
+       for(ReportField field : fieldComponents){
+           if(field.getFieldArguments().size() > 0){
+              return  true;
+           }
+       }  
+      return false;
+    }
 }
