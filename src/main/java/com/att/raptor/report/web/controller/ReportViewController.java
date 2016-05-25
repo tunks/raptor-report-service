@@ -33,13 +33,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/att/reports/view")
 public class ReportViewController {
-
+    /*
+     * jasper report service
+     */
     @Autowired
     private JasperReportService jasperReportService;
-
+    /*
+     Report template service
+    */
     @Autowired
     private ReportTemplateService reportTemplateService;
-
     /**
      * HTTP request method to generate report
      *
