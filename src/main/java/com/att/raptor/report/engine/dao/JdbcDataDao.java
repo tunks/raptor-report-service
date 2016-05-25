@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 import org.springframework.jdbc.support.JdbcUtils;
@@ -127,6 +126,8 @@ public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<DataSourcePro
         /**
          * Extract the result list
          * return List
+         * @param ps
+         * @return 
          * @throws java.sql.SQLException
          **/
         @Override

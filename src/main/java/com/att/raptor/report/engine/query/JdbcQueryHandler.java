@@ -35,7 +35,7 @@ public class JdbcQueryHandler extends QueryHandler<PreparedStatement, List<Strin
         super(template);
         queryParser = parser;
         modelSet = new HashSet();
-        fieldSets = createFieldSets(template);
+        fieldSets = createFieldSets(template.getComponents());
     }
 
     @Override
@@ -61,13 +61,12 @@ public class JdbcQueryHandler extends QueryHandler<PreparedStatement, List<Strin
     @Override
     public Set getFieldSet() {
           if(fieldSets == null || fieldSets.isEmpty())
-             fieldSets =createFieldSets(this.getTemplate());
+             fieldSets =createFieldSets(this.getTemplate().getComponents());
         return fieldSets;
     }
 
-    private Set<String> createFieldSets(ReportTemplate template) {
-        Set<ReportComponent> components = template.getComponents();
-        Set<String> fieldSet = new HashSet();
+    private Set<String> createFieldSets(  Set<ReportComponent> components ) {
+         Set<String> fieldSet = new HashSet();
         for (ReportComponent component : components) {
              fieldSet.addAll(createFieldSet(component.getFieldComponents()));
         }
