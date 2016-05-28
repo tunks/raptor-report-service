@@ -42,7 +42,6 @@ public class EmailNotificationService implements NotificationService<SimpleMailM
         helper.setTo(message.getTo());
         helper.setSubject(message.getSubject());
         helper.setText(message.getText(),true);
-       
         //FileSystemResource file = new FileSystemResource("C:\\log.txt");
         //helper.addAttachment(file.getFilename(), file);
         return mimeMessage;

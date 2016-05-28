@@ -7,7 +7,6 @@
  */
 package com.att.raptor.report.engine.query;
 
-import com.att.raptor.report.data.domain.ReportTemplate;
 import java.util.Set;
 
 /**
@@ -15,32 +14,10 @@ import java.util.Set;
  *
  * @author ebrimatunkara
  * @param <T>
- * @param <R>
+ * @param <V>
  */
-public abstract class QueryHandler<T, R> {
+public abstract class QueryHandler<T,V> {
+    //public abstract void parseQuery(QueryService reportQueryService, ReportTemplate template);
+    public abstract V parseQuery(T object);
 
-    ReportTemplate template;
-
-    public QueryHandler() {
-    }
-
-    public QueryHandler(ReportTemplate template) {
-        this.template = template;
-    }
-
-    public ReportTemplate getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(ReportTemplate template) {
-        this.template = template;
-    }
-
-    public abstract R parseQuery();
-
-    public abstract T getQuery();
-
-    public abstract String getQueryString();
-
-    public abstract Set getFieldSet();
 }

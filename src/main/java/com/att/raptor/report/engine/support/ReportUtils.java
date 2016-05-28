@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -46,13 +47,13 @@ public class ReportUtils {
 
     }
 
-    public static  ByteArrayOutputStream   generateReport(JasperPrint jsPrinter, ReportFormat format, String templateId) {
+    public static  ByteArrayOutputStream   generateReport(List<JasperPrint> jsPrinter, ReportFormat format, String templateId) {
         IGenerator<ByteArrayOutputStream> generator = JasperReportFactory.createNewGenerator(jsPrinter, format);
         ByteArrayOutputStream out = generator.generate();
         return out;
     }
     
-    public static ReportOutputFile generateReportFile(JasperPrint jsPrinter, ReportFormat format, String templateId,String directory) throws FileNotFoundException, IOException {
+    public static ReportOutputFile generateReportFile(List<JasperPrint> jsPrinter, ReportFormat format, String templateId,String directory) throws FileNotFoundException, IOException {
         ByteArrayOutputStream out =  generateReport(jsPrinter,format,templateId) ;
         String filename = templateId;
         String fileType = format.getFormat().toLowerCase();
@@ -64,7 +65,7 @@ public class ReportUtils {
         return new ReportOutputFile(filePath, format);
     }
     
-     public static ReportOutputFile generateReportFile(JasperPrint jsPrinter, ReportFormat format, String templateId) throws FileNotFoundException, IOException {
+     public static ReportOutputFile generateReportFile(List<JasperPrint> jsPrinter, ReportFormat format, String templateId) throws FileNotFoundException, IOException {
         return  generateReportFile(jsPrinter,format,templateId,null);
     }
 }

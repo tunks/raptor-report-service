@@ -30,7 +30,9 @@ import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.MetaDataAccessException;
 import org.springframework.stereotype.Component;
-import com.att.raptor.report.engine.query.QueryHandler;
+import com.att.raptor.report.engine.query.QueryUtils.QuerySet;
+import com.att.raptor.report.engine.query.callback.DbQueryCallback;
+import com.att.raptor.report.engine.query.callback.DbTableCallback;
 
 /**
  * JDBCDataDao class- implementation of the BaseDao This data source access
@@ -39,7 +41,7 @@ import com.att.raptor.report.engine.query.QueryHandler;
  * @author ebrimatunkara
  */
 @Component("jdbcDatadao")
-public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<DataSourceProperty, List> {
+public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<String, List> {
 
     @Autowired
     public JdbcDataDao(JdbcTemplate jdbcTemplate) {
@@ -51,10 +53,10 @@ public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<DataSourcePro
      *
      */
     @Override
-    public Set getModels() {
+    public Set getModels(DatabaseMetaDataCallback callback) {
         try {
-            GetTableNames tableNames = new GetTableNames();
-            Object result = JdbcUtils.extractDatabaseMetaData(this.getDataSource(), tableNames);
+            DbTableCallback tableCallback = new DbTableCallback();
+            Object result = JdbcUtils.extractDatabaseMetaData(this.getDataSource(), tableCallback);
             return (Set) result;
         } catch (MetaDataAccessException ex) {
             Logger.getLogger(JdbcDataDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,77 +64,21 @@ public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<DataSourcePro
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Set getModels(DataSourceProperty t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * Data
      *
-     * @param queryHandler
+     * @param querySet
+     * @param callback
      */
-    @Override
-    public List getResults(QueryHandler queryHandler) {
-        return getJdbcTemplate().execute(queryHandler.getQueryString(), new DataListPreparedStatement(queryHandler));
-    }
+//    @Deprecated
+//    @Override
+//    public List getResults(String query) {
+//        return getJdbcTemplate().execute(query, new DbQueryCallback(querySet.getFieldSet()));
+//    }
 
     @Override
-    public List getResults(DataSourceProperty t, QueryHandler query) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List getResults(String query, PreparedStatementCallback<List> callback) {
+         return getJdbcTemplate().execute(query,callback);
     }
 
-    private class GetTableNames implements DatabaseMetaDataCallback {
-
-        @Override
-        public Object processMetaData(DatabaseMetaData dbmd) throws SQLException {
-            String catalog = dbmd.getConnection().getCatalog();
-            ResultSet rs = dbmd.getTables(catalog, null, "%", null);
-            String tableName;
-            Set<DataSourceModel> models = new HashSet();
-            while (rs.next()) {
-                tableName = rs.getString(3);
-                Set<DataField> fields = getColumns(dbmd.getColumns(catalog, tableName, tableName, null));
-                models.add(new DataSourceModel(null, tableName, fields));
-            }
-            return models;
-        }
-
-        private Set getColumns(ResultSet rs) throws SQLException {
-            int typeIndex;
-            String columnName;
-            DataFieldType dataType;
-            Set<DataField> fields = new HashSet();
-            while (rs.next()) {
-                columnName = rs.getString(4);
-                typeIndex = Integer.parseInt(rs.getString(5));
-                dataType = DataFieldType.getDataFieldType(typeIndex);
-                fields.add(new DataField(null, columnName, dataType));
-            }
-            return fields;
-        }
-    }
-
-    public class DataListPreparedStatement implements PreparedStatementCallback<List> {
-        QueryHandler queryHandler;
-
-        public DataListPreparedStatement() {
-        }
-
-        public DataListPreparedStatement(QueryHandler queryHandler) {
-            this.queryHandler = queryHandler;
-        }
-        
-        /**
-         * Extract the result list
-         * return List
-         * @param ps
-         * @return 
-         * @throws java.sql.SQLException
-         **/
-        @Override
-        public List doInPreparedStatement(PreparedStatement ps) throws SQLException, DataAccessException {           
-            return QueryUtils.extractListFromRs(ps.executeQuery(),queryHandler.getFieldSet());
-        }
-    }
 }

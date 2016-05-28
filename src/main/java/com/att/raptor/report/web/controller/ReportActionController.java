@@ -57,7 +57,7 @@ public class ReportActionController {
         ReportTemplate template = reportTemplateService.find(request.getTemplateId());
         if (template != null) {
             QueryParser  parser = JasperReportFactory.createQueryParser();
-            jasperReportService.process(new JdbcQueryHandler(template,parser));
+            jasperReportService.generate(new JdbcQueryHandler(parser),template);
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity<>("No such report available", HttpStatus.NOT_FOUND);

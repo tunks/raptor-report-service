@@ -25,6 +25,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -57,10 +64,8 @@ public class JasperReportServiceTest {
 
     @Before
     public void setUp() {
-        String templateId = "5722328fd4c69551a9dcbb0f";// 5722328fd4c69551a9dcbb0f
-        ReportTemplate template = reportTemplateService.find(templateId);
         QueryParser  parser = JasperReportFactory.createQueryParser();
-        handler = new JdbcQueryHandler(template,parser);
+        handler = new JdbcQueryHandler(parser);
        format = ReportFormat.formatType("html");
     }
 
@@ -72,17 +77,19 @@ public class JasperReportServiceTest {
     /**
      * Test of generate method, of class JasperReportService.
      */
-   // @Test
+    @Test
     public void testProcess() {
         System.out.println("generate");
-        Object result = jasperReportService.process(handler,format);
+        String templateId = "5722328fd4c69551a9dcbb0f";// 5722328fd4c69551a9dcbb0f
+        ReportTemplate template = reportTemplateService.find(templateId);
+        Object result = jasperReportService.generate(handler,template,format);
         System.out.println(result);
         assertNotNull(result);
     }
     
     @Test
     public void proccessAction(){
-       // jasperReportService.process(handler);
+       // jasperReportService.generate(handler);
     }
 }
 //

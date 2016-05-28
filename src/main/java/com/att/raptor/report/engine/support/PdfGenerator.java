@@ -8,6 +8,7 @@
 package com.att.raptor.report.engine.support;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
@@ -23,7 +24,7 @@ import net.sf.jasperreports.export.SimplePdfReportConfiguration;
  */
 public class PdfGenerator extends JasperGenerator {
 
-    public PdfGenerator(JasperPrint jsPrint) {
+    public PdfGenerator(List<JasperPrint> jsPrint) {
         super(jsPrint);
     }
 
@@ -33,7 +34,7 @@ public class PdfGenerator extends JasperGenerator {
             
             JRPdfExporter exporter = new JRPdfExporter();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            exporter.setExporterInput(new SimpleExporterInput(this.getJsPrint()));
+            exporter.setExporterInput(SimpleExporterInput.getInstance(this.getJsPrint()));
             exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputStream));
             SimplePdfReportConfiguration configuration = new SimplePdfReportConfiguration();
             configuration.setSizePageToContent(true);

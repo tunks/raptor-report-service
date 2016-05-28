@@ -7,36 +7,35 @@
  */
 package com.att.raptor.report.engine.support;
 
-import com.att.raptor.report.engine.query.ArgumentQueryParser;
+import com.att.raptor.report.engine.query.JdbcQueryParser;
 import com.att.raptor.report.engine.query.QueryParser;
-import com.att.raptor.report.engine.query.SimpleQueryParser;
+import java.util.List;
 import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  *
  * @author ebrimatunkara
  */
-public class JasperReportFactory implements ReportBaseFactory<JasperPrint, JasperGenerator> {
-
+public class JasperReportFactory implements ReportBaseFactory<List<JasperPrint>, JasperGenerator> {
     @Override
     public JasperGenerator createGenerator(ReportFormat format) {
       return createGenerator(null,format);
     }
 
     @Override
-    public JasperGenerator createGenerator(JasperPrint object, ReportFormat format) {
+    public JasperGenerator createGenerator(List<JasperPrint> jsPrints, ReportFormat format) {
         switch (format) {
             case XLSX:
-                return new XlsxGenerator(object);
+                return new XlsxGenerator(jsPrints);
             case PDF:
-                return new PdfGenerator(object);
+                return new PdfGenerator(jsPrints);
             default:
-                return new HtmlGenerator(object);
+                return new HtmlGenerator(jsPrints);
         }
 
     }
     
-   public static JasperGenerator createNewGenerator(JasperPrint object, ReportFormat format) {
+   public static JasperGenerator createNewGenerator(List<JasperPrint> object, ReportFormat format) {
            return CreateFactory().createGenerator(object, format);
     }
 
@@ -49,8 +48,7 @@ public class JasperReportFactory implements ReportBaseFactory<JasperPrint, Jaspe
      * @return 
      **/
     public static QueryParser createQueryParser(){
-        ArgumentQueryParser conParser = new ArgumentQueryParser();
-        return new SimpleQueryParser(conParser);
+        return new JdbcQueryParser();
     }
     
 }

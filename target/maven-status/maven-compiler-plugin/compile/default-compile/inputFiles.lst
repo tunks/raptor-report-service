@@ -8,7 +8,6 @@
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/support/ReportRequest.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/service/EmailNotificationService.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/repositories/DataSourceRepository.java
-/Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/query/SimpleQueryParser.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/domain/ReportArgumentField.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/support/IGenerator.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/support/XlsxGenerator.java
@@ -17,7 +16,6 @@
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/repositories/ReportOutputRepository.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/support/DataFieldType.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/repositories/ReportTemplateRepository.java
-/Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/query/QueryCriteria.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/domain/ReportComponent.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/service/CrudBaseService.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/support/FilterPredicate.java
@@ -50,7 +48,6 @@
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/service/NotificationService.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/service/ReportBaseService.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/domain/ReportTemplate.java
-/Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/query/ArgumentQueryParser.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/support/ReportBaseAction.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/query/JdbcQueryHandler.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/query/JdbcQueryParser.java
@@ -66,8 +63,8 @@
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/domain/DataSource.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/support/Functor.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/web/controller/ReportComponentController.java
+/Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/service/QueryService.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/support/PdfGenerator.java
-/Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/service/IService.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/domain/DataSourceModel.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/engine/query/QueryUtils.java
 /Users/ebrimatunkara/development/projects/raptor-report/src/main/java/com/att/raptor/report/data/domain/DataSourceProperty.java

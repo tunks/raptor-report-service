@@ -8,6 +8,7 @@
 package com.att.raptor.report.engine.support;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
@@ -23,7 +24,7 @@ import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
  */
 public class XlsxGenerator extends JasperGenerator<ByteArrayOutputStream> {
 
-    public XlsxGenerator(JasperPrint jsPrint) {
+    public XlsxGenerator(List<JasperPrint> jsPrint) {
         super(jsPrint);
     }
 
@@ -32,7 +33,7 @@ public class XlsxGenerator extends JasperGenerator<ByteArrayOutputStream> {
         try {
             JRXlsExporter exporter = new JRXlsExporter();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            exporter.setExporterInput(new SimpleExporterInput(this.getJsPrint()));
+            exporter.setExporterInput(SimpleExporterInput.getInstance(this.getJsPrint()));
             exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputStream));
             SimpleXlsxReportConfiguration configuration = new SimpleXlsxReportConfiguration();
             configuration.setDetectCellType(true);

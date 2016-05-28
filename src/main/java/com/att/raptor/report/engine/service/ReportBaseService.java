@@ -7,6 +7,7 @@
  */
 package com.att.raptor.report.engine.service;
 
+import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.engine.query.QueryHandler;
 import com.att.raptor.report.engine.support.ReportFormat;
 /**
@@ -15,6 +16,6 @@ import com.att.raptor.report.engine.support.ReportFormat;
  * @param <T>
  */
 public interface ReportBaseService<T>{
-    public T process(QueryHandler handler, ReportFormat format );
-    public void process(QueryHandler handler);
+    public T generate(QueryHandler handler,ReportTemplate template  );
+    public T generate(QueryHandler handler, ReportTemplate template,ReportFormat format );
 }

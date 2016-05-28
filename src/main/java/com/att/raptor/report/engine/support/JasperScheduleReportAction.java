@@ -28,20 +28,20 @@ import net.sf.jasperreports.engine.JasperPrint;
  */
 public class JasperScheduleReportAction implements ReportBaseAction<ReportOutput> {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-    private final JasperPrint jsPrinter;
+    private final List<JasperPrint> jsPrinter;
     private final String fileDirectory;
     private final String reportName;
     
-    public JasperScheduleReportAction(JasperPrint jsPrinter, String fileDirectory,String reportName) {
+    public JasperScheduleReportAction(List<JasperPrint> jsPrinter, String fileDirectory,String reportName) {
         this.jsPrinter = jsPrinter;
         this.fileDirectory = fileDirectory;
         this.reportName = reportName;
     }
 
     @Override
-    public ReportOutput process(String templateId) {
+    public ReportOutput generate(String templateId) {
            ReportOutput output = new ReportOutput(templateId, new HashSet(), reportName);
-        try {
+           try {
             List<ScheduleTask> tasks = new ArrayList();
             for(ReportFormat format : ReportFormat.values()){
                 tasks.add(new ScheduleTask(templateId, format,  jsPrinter,fileDirectory));
@@ -55,27 +55,23 @@ public class JasperScheduleReportAction implements ReportBaseAction<ReportOutput
         } catch (InterruptedException | ExecutionException ex) {
             Logger.getLogger(JasperScheduleReportAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+        executor.shutdown();
         return output;
     }
 
-    @Override
-    public void shutdown() {
-            executor.shutdown();
-    }
-   
     private class ScheduleTask implements Callable<ReportOutputFile>{
         private final ReportFormat format;
         private final String templateId;
-        private final JasperPrint jsPrinter;
+        private final List<JasperPrint> jsPrinter;
         private String directory;
         
-        public ScheduleTask(String templateId, ReportFormat format,JasperPrint jsPrinter) {
+        public ScheduleTask(String templateId, ReportFormat format,List<JasperPrint> jsPrinter) {
             this.templateId = templateId;
             this.format = format;
             this.jsPrinter = jsPrinter;
         }
 
-        public ScheduleTask(String templateId, ReportFormat format,  JasperPrint jsPrinter, String directory) {
+        public ScheduleTask(String templateId, ReportFormat format,  List<JasperPrint> jsPrinter, String directory) {
             this(templateId,format,jsPrinter);
             this.directory = directory;
         }

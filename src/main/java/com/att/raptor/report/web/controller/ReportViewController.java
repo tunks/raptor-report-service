@@ -64,8 +64,8 @@ public class ReportViewController {
         if (template != null) {
             String filename = templateId + "." + format.getFormat();
             QueryParser parser = JasperReportFactory.createQueryParser();
-            QueryHandler handler = new JdbcQueryHandler(template, parser);  
-            try (ByteArrayOutputStream out = jasperReportService.process(handler, format)) {
+            QueryHandler handler = new JdbcQueryHandler(parser);  
+            try (ByteArrayOutputStream out = jasperReportService.generate(handler, template, format)) {
                 response.setContentType(mediaType.toString());
                 response.setHeader("Content-Disposition", String.format("inline; filename=\"" + filename + "\""));
                 byte[] outBytes = out.toByteArray();

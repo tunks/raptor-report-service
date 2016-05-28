@@ -7,11 +7,8 @@
  */
 package com.att.raptor.report.engine.dao;
 
-import com.att.raptor.report.data.domain.DataSourceProperty;
-import com.att.raptor.report.engine.query.JdbcQueryHandler;
-import java.sql.ResultSet;
+import com.att.raptor.report.engine.query.callback.DbTableCallback;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -23,8 +20,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import java.util.HashSet;
-import com.att.raptor.report.engine.query.QueryHandler;
 
 /**
  *
@@ -61,7 +56,7 @@ public class JdbcDataDaoTest {
     @Test
     public void testGetModels() throws SQLException {
         System.out.println("get models");
-        Set result = jdbcDatadao.getModels();
+        Set result = jdbcDatadao.getModels(new DbTableCallback());
         System.out.println("result ... "+result);
         assertTrue(result.size()> 0);
     }

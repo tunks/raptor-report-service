@@ -8,6 +8,7 @@
 package com.att.raptor.report.engine.support;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
@@ -21,7 +22,7 @@ import net.sf.jasperreports.export.SimpleHtmlExporterOutput;
  * @author ebrimatunkara
  */
 public class HtmlGenerator extends JasperGenerator<ByteArrayOutputStream>{
-    public HtmlGenerator(JasperPrint jsPrint) {
+    public HtmlGenerator(List<JasperPrint> jsPrint) {
         super(jsPrint);
     }
 
@@ -30,7 +31,7 @@ public class HtmlGenerator extends JasperGenerator<ByteArrayOutputStream>{
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             HtmlExporter exporter = new HtmlExporter();
-            exporter.setExporterInput(new SimpleExporterInput(this.getJsPrint()));
+            exporter.setExporterInput(SimpleExporterInput.getInstance(this.getJsPrint()));
             exporter.setExporterOutput(new SimpleHtmlExporterOutput(outputStream));
             exporter.exportReport();
             return outputStream;

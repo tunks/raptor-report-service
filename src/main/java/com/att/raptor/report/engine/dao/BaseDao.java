@@ -9,39 +9,29 @@ package com.att.raptor.report.engine.dao;
 
 import java.util.Set;
 import com.att.raptor.report.engine.query.QueryHandler;
+import java.util.List;
+import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 
 /**
  * Report Engine Data Access Layer interface
  * @author ebrimatunkara
  * @param <T>
- * @param <R>
+ * @param <V>
  */
-public interface BaseDao<T,R>{
+public interface BaseDao<T,V>{
    /**
     * Get results 
+     * @param callback
     * @return 
     */
-   public Set getModels();
-   /**
-    * Get results of the data source schema
-     * @param t
-     * @return 
-    **/
-   public Set getModels(T t);
+   public Set getModels(DatabaseMetaDataCallback callback);
    
    /**
-    * Get results with query 
-    * @param t
+    * Get results with query callback
     * @param query
+    * @param callback
     * @return 
     */
-   public R getResults(QueryHandler query);
-   
-   /**
-    * Get results with query 
-    * @param t
-    * @param query
-    * @return 
-    */
-   public R getResults(T t,  QueryHandler query);
+   public V getResults(T query, PreparedStatementCallback<List> callback);
 }

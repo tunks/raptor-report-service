@@ -12,6 +12,7 @@ import com.att.raptor.report.data.domain.DataSourceModel;
 import com.att.raptor.report.data.domain.DataSourceProperty;
 import com.att.raptor.report.data.repositories.DataSourceRepository;
 import com.att.raptor.report.engine.dao.JdbcDataDao;
+import com.att.raptor.report.engine.query.callback.DbTableCallback;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -71,7 +72,7 @@ public class DataSourceService implements CrudBaseService<DataSource, String> {
 
     /**
      * *
-     * TODO Map JDBC local database schema into Datasource repository collection
+     * TODO Map JDBC local database schema into Data source repository collection
      *
      * @return
      */
@@ -79,7 +80,7 @@ public class DataSourceService implements CrudBaseService<DataSource, String> {
         DataSourceProperty property = new DataSourceProperty();
         property.setServerAddress("localhost");
         DataSource source = new DataSource("localhost", property);
-        Set<DataSourceModel> models = jdbcDatadao.getModels();
+        Set<DataSourceModel> models = jdbcDatadao.getModels(new DbTableCallback());
         source.setModels(models);
         return source;
     }

@@ -7,13 +7,16 @@
  */
 package com.att.raptor.report.engine.service;
 
+import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.engine.query.QueryHandler;
 
 /**
  * Query Service interface
  * @author ebrimatunkara
- * @param <R>
+ * @param <T>
+ * @param <V>
  */
-public interface IService<R> {
-      public R query(QueryHandler handler);
+public interface QueryService<T,V> {
+      public T query(V object);
+      public T query(QueryHandler handler, ReportTemplate template);
 }

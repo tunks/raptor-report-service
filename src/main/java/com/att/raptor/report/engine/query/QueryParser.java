@@ -8,28 +8,12 @@
 package com.att.raptor.report.engine.query;
 
 /**
- * QueryParser abstract class
+ * QueryParser interface
  *
  * @author ebrimatunkara
  * @param <T>
+ * @param <V>
  */
-public abstract class QueryParser<T> {
-    private QueryParser nextParser;
-
-    public QueryParser() {
-    }
-    
-    public QueryParser(QueryParser nextParser) {
-        this.nextParser = nextParser;
-    }
-
-    public QueryParser getNextParser() {
-        return nextParser;
-    }
-
-    public void setNextParser(QueryParser nextParser) {
-        this.nextParser = nextParser;
-    }
-
-    public abstract String parse(T object);
+public interface QueryParser<T,V> {
+    public  T parse(V object);
 }

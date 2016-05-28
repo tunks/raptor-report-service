@@ -80,6 +80,7 @@ public class JasperReportBuilder implements ReportBuilder<JasperPrint,Set<String
                 //.setIgnorePagination(true)
                 .setMargins(10, 10, 10, 10)
                 .setUseFullPageWidth(true)
+                
                 .setSubtitle("This report was generated at " + new Date())
                 .setIgnorePagination(false)
                 .build();

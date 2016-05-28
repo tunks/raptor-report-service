@@ -7,25 +7,28 @@
  */
 package com.att.raptor.report.engine.support;
 
+import java.util.List;
 import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * JasperGenerator abstract implementation of the IGenerator interface
+ *
  * @author ebrimatunkara
  * @param <T>
  */
-public abstract class JasperGenerator<T> implements IGenerator<T>{
-     private JasperPrint jsPrint;
-     
-     public JasperGenerator(JasperPrint jsPrint){
-         this.jsPrint = jsPrint;              
-     }
+public abstract class JasperGenerator<T> implements IGenerator<T> {
+    private List<JasperPrint> jsPrint;
 
-     public JasperPrint getJsPrint() {
-        return jsPrint;
-     }
-
-    public void setJsPrint(JasperPrint jsPrint) {
+    public JasperGenerator(List<JasperPrint> jsPrint) {
         this.jsPrint = jsPrint;
     }
+
+    public List<JasperPrint> getJsPrint() {
+        return jsPrint;
+    }
+
+    public void setJsPrint(List<JasperPrint> jsPrint) {
+        this.jsPrint = jsPrint;
+    }
+
 }
