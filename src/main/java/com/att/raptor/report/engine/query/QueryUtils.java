@@ -25,7 +25,6 @@ import org.apache.commons.lang3.RandomStringUtils;
  * @author ebrimatunkara
  */
 public final class QueryUtils {
-
     public static Map<String, Object> extractFromRs(ResultSet rs, Set fieldSet) throws SQLException {
         String name;
         Iterator<String> itr = fieldSet.iterator();
