@@ -51,8 +51,6 @@ public class JdbcQueryHandler extends QueryHandler<ReportComponent, QuerySet> {
     **/
     @Override
     public QuerySet  parseQuery(ReportComponent component) {
-      //  Set<String> fieldSet = createFieldSet(component.getFieldComponents());
         return queryParser.parse(component);
-        ///return  new QuerySet(fieldSet,query);
     }
 }

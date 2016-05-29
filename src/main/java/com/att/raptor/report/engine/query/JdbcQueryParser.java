@@ -93,7 +93,7 @@ public class JdbcQueryParser implements QueryParser<QuerySet,ReportComponent> {
         DbTable table;
         Table.Cell<String,String,ReportField> cell;
         //field set for visible fields
-        QuerySet<String>  querySet = new QuerySet();
+        QuerySet<ReportField>  querySet = new QuerySet();
         ReportField field;
         while(itr.hasNext()){
             cell = itr.next();
@@ -104,7 +104,7 @@ public class JdbcQueryParser implements QueryParser<QuerySet,ReportComponent> {
             if(cell.getValue().isVisible()){
               query.addColumns(column);
               //add field name to the fieldset  in the queryset instance
-              querySet.addField(field.getName());
+              querySet.addField(field);
             }
             //add the field query condition 
             createFieldQuery(column,cell.getValue().getFieldArguments() , query); 

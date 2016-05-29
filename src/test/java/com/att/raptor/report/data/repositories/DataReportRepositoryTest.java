@@ -72,13 +72,4 @@ public class DataReportRepositoryTest {
       assertEquals(dr.getName(), result.getName());
     }
     
-//    
-//     @Test
-//    public void testUpdateWithExistingReference(){
-//      DataReport dr = dataReportRepository.findOne("5711e028d4c6ff612f8154ac");
-//      dr.setName("Daily tickets closed zzzzz1");
-//      DataReport result = dataReportRepository.update(dr);
-//      assertEquals(dr.getName(), result.getName());
-//    }
-//    
 }

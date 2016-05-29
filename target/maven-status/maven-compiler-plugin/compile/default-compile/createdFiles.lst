@@ -8,12 +8,14 @@ com/att/raptor/report/data/domain/ReportOutputFile.class
 com/att/raptor/report/data/repositories/ReportComponentRepository.class
 com/att/raptor/report/data/support/TemplateException.class
 com/att/raptor/report/data/service/ReportComponentService.class
+com/att/raptor/report/engine/query/callback/DbQueryCallback.class
 com/att/raptor/report/engine/support/IMessage.class
 com/att/raptor/report/data/domain/ReportComponent.class
 com/att/raptor/report/engine/support/ReportBaseAction.class
 com/att/raptor/report/data/service/CrudBaseService.class
 com/att/raptor/report/web/controller/ReportViewController.class
 com/att/raptor/report/data/domain/ReportFolderProjection.class
+com/att/raptor/report/engine/query/QueryFactory.class
 com/att/raptor/report/engine/support/JasperReportFactory.class
 com/att/raptor/report/engine/support/Functor.class
 com/att/raptor/report/data/support/CustomDateSerializer.class
@@ -22,7 +24,6 @@ com/att/raptor/report/data/domain/DataProvider.class
 com/att/raptor/report/engine/service/JasperReportService.class
 com/att/raptor/report/engine/query/JdbcQueryHandler.class
 com/att/raptor/report/engine/support/ReportFieldPredicate.class
-com/att/raptor/report/engine/dao/JdbcDataDao$DataListPreparedStatement.class
 com/att/raptor/report/data/domain/ReportField.class
 com/att/raptor/report/engine/support/XlsxGenerator.class
 com/att/raptor/report/engine/support/IGenerator.class
@@ -41,7 +42,6 @@ com/att/raptor/report/data/repositories/DataReportRepository.class
 com/att/raptor/report/data/repositories/DataRepositoryCustom.class
 com/att/raptor/report/data/repositories/DataSourceRepository.class
 com/att/raptor/report/engine/service/ReportQueryService.class
-com/att/raptor/report/engine/dao/JdbcDataDao$GetTableNames.class
 com/att/raptor/report/engine/service/JasperReportService$QueryParserTask.class
 com/att/raptor/report/data/domain/DataReport.class
 com/att/raptor/report/engine/support/ReportRequest.class
@@ -65,12 +65,13 @@ com/att/raptor/report/data/listeners/ReportFolderBeforeSaveListener.class
 com/att/raptor/report/web/controller/ControllerBase.class
 com/att/raptor/report/data/support/FieldOperator.class
 com/att/raptor/report/engine/support/JasperScheduleReportAction$ScheduleTask.class
+com/att/raptor/report/engine/query/JdbcQueryFactory.class
+com/att/raptor/report/engine/query/callback/DbTableCallback.class
 com/att/raptor/report/data/support/FieldAggregateType.class
 com/att/raptor/report/web/controller/ReportFolderController.class
 com/att/raptor/report/engine/query/QueryParser.class
 com/att/raptor/report/data/repositories/ReportFolderRepository.class
 com/att/raptor/report/engine/support/JasperGenerator.class
-com/att/raptor/report/engine/dao/JdbcDataDao$1.class
 com/att/raptor/report/starter/SimpleCORSFilter.class
 com/att/raptor/report/data/domain/Template.class
 com/att/raptor/report/data/listeners/ReportDocumentAfterSaveLister.class

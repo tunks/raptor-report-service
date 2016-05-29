@@ -9,6 +9,7 @@ package com.att.raptor.report.engine.service;
 
 import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.engine.dao.JdbcDataDao;
+import com.att.raptor.report.engine.query.JdbcQueryFactory;
 import com.att.raptor.report.engine.query.QueryHandler;
 import com.att.raptor.report.engine.query.QueryUtils.QuerySet;
 import com.att.raptor.report.engine.query.callback.DbQueryCallback;
@@ -18,7 +19,7 @@ import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.stereotype.Service;
 
 /**
- *
+ * ReportQueryService 
  * @author ebrimatunkara
  */
 @Service("reportQueryService")
@@ -28,7 +29,7 @@ public class ReportQueryService implements QueryService<List,QuerySet>{
     
     @Override
     public List query(QuerySet querySet) {
-        PreparedStatementCallback callback = new DbQueryCallback(querySet.getFieldSet());
+        PreparedStatementCallback callback = JdbcQueryFactory.createNewQueryCallback(querySet);
         return jdbcDatadao.getResults(querySet.getQueryString(), callback);
     }  
 

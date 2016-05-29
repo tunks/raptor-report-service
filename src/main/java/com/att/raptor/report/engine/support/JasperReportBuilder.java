@@ -10,14 +10,17 @@ package com.att.raptor.report.engine.support;
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.domain.DynamicReport;
+import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
+import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import com.att.raptor.report.data.domain.ReportComponent;
 import com.att.raptor.report.data.domain.ReportField;
 import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.data.support.DataFieldType;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,12 +35,13 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JRDesignStyle;
 
 /**
  * @author ebrimatunkara
  * JasperReportBuilder implementation -- implements ReportBuilder
  */
-public class JasperReportBuilder implements ReportBuilder<JasperPrint,Set<String>> {
+public class JasperReportBuilder implements ReportBuilder<JasperPrint,Set<ReportField>> {
     private final FastReportBuilder builder;
     private JasperReport jreport;
     private Map params = new HashMap();
@@ -46,21 +50,22 @@ public class JasperReportBuilder implements ReportBuilder<JasperPrint,Set<String
         builder = new FastReportBuilder();
     }
 
+    
     @Override
     public JasperPrint build(ReportTemplate template, List data) {
-        try {
-            DynamicReport report = prepare(template);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public JasperPrint build(ReportTemplate template, List data, Set<ReportField> fieldset) {
+      try {
+            DynamicReport report = prepare(template,fieldset);
             jreport = DynamicJasperHelper.generateJasperReport(report, new ClassicLayoutManager(), params);
             return JasperFillManager.fillReport(jreport, params, prepareDataSource(data));
         } catch (JRException | ColumnBuilderException ex) {
             Logger.getLogger(JasperReportBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-    
-    @Override
-    public JasperPrint build(ReportTemplate template, List data, Set<String> fieldset) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private JRDataSource prepareDataSource(List data) {
@@ -75,7 +80,7 @@ public class JasperReportBuilder implements ReportBuilder<JasperPrint,Set<String
         this.params = params;
     }
 
-    public DynamicReport prepare(ReportTemplate template) {
+    public DynamicReport prepare(ReportTemplate template,  Set<ReportField> fieldset) {
         DynamicReport report = builder.setReportName(template.getName())
                 //.setIgnorePagination(true)
                 .setMargins(10, 10, 10, 10)
@@ -84,48 +89,38 @@ public class JasperReportBuilder implements ReportBuilder<JasperPrint,Set<String
                 .setSubtitle("This report was generated at " + new Date())
                 .setIgnorePagination(false)
                 .build();
-        ReportColumns(report, template.getComponents());
+        
+        //append report columns
+        appendColumns(report,fieldset);
         return report;
     }
 
-    public void ReportColumns(DynamicReport report, Set<ReportComponent> components) {
-        if (components == null) {
-            return;
-        }
-
-        List<AbstractColumn> columns;
-        for (ReportComponent component : components) {
-            columns = createColumns(component.getFieldComponents());
-            report.setColumns(columns);
-        }
-    }
-
-    protected List<AbstractColumn> createColumns(Set<ReportField> fields) {
+    private void appendColumns(DynamicReport report, Set<ReportField> fields) {
         List<AbstractColumn> columns = new ArrayList();
-        
-        for (ReportField field : fields) {
-            
+        for (ReportField field : fields) {          
             columns.add(createColumn(field));
         }
-        return columns;
+        report.setColumns(columns);
     }
 
     private AbstractColumn createColumn(ReportField field) {
         String name = field.getName();
         DataFieldType dfieldType = field.getFieldType();
-        //TODO 
-        String fType;
-        if (dfieldType == null) {
-            fType = String.class.getName();
-        } else {
-            fType = dfieldType.getType();
-        }
+        String fieldType = (dfieldType == null)?  String.class.getName(): dfieldType.getType();
         ColumnBuilder cBuilder = ColumnBuilder.getNew();
-        cBuilder.setColumnProperty(name, DataFieldType.STRING.getType());
+        cBuilder.setColumnProperty(name, fieldType);
+        cBuilder.setHeaderStyle(defineFieldStyle(field));
         cBuilder.setTitle(columnTitle(field));
         return cBuilder.build();
     }
 
+    private Style defineFieldStyle(ReportField field){ 
+      Style style = new Style("titleStyle");
+      style.setHorizontalAlign(HorizontalAlign.LEFT);
+      //style.setBackgroundColor(Color.GRAY);
+      //style.setBackgroundColor(Color.GREEN);
+      return style;
+    }
     /***
      * Define column title
      * Use the field label if it is available else use the field name

@@ -8,6 +8,7 @@
 package com.att.raptor.report.engine.service;
 
 import com.att.raptor.report.data.domain.ReportComponent;
+import com.att.raptor.report.data.domain.ReportField;
 import com.att.raptor.report.data.domain.ReportOutput;
 import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.data.service.CrudBaseService;
@@ -79,8 +80,9 @@ public class JasperReportService implements ReportBaseService<ByteArrayOutputStr
         List<Future<QuerySet>> futures= executor.invokeAll(tasks);
         List<JasperPrint> jsPrints  = new ArrayList();
         for(Future<QuerySet> future : futures){
-            List results = reportQueryService.query(future.get());
-            JasperPrint jsPrint = builder.build(template,results);
+            QuerySet<ReportField> querySet = future.get();
+            List results = reportQueryService.query(querySet);
+            JasperPrint jsPrint = builder.build(template,results,querySet.getFieldSet());
             jsPrints.add(jsPrint);
         }
         return jsPrints;
