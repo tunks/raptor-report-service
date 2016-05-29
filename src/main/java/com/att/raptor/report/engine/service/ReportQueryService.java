@@ -12,7 +12,6 @@ import com.att.raptor.report.engine.dao.JdbcDataDao;
 import com.att.raptor.report.engine.query.JdbcQueryFactory;
 import com.att.raptor.report.engine.query.QueryHandler;
 import com.att.raptor.report.engine.query.QueryUtils.QuerySet;
-import com.att.raptor.report.engine.query.callback.DbQueryCallback;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.PreparedStatementCallback;

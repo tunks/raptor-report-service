@@ -67,15 +67,8 @@ public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<String, List>
     /**
      * Data
      *
-     * @param querySet
      * @param callback
      */
-//    @Deprecated
-//    @Override
-//    public List getResults(String query) {
-//        return getJdbcTemplate().execute(query, new DbQueryCallback(querySet.getFieldSet()));
-//    }
-
     @Override
     public List getResults(String query, PreparedStatementCallback<List> callback) {
          return getJdbcTemplate().execute(query,callback);

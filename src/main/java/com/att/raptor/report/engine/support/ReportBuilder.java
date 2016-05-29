@@ -9,6 +9,7 @@ package com.att.raptor.report.engine.support;
 
 import com.att.raptor.report.data.domain.ReportTemplate;
 import java.util.List;
+import java.util.Map;
 
 /** 
  * Report Builder interface
@@ -18,5 +19,5 @@ import java.util.List;
  */
 public interface ReportBuilder <T,V>{
     public T build(ReportTemplate template, List data);
-    public T build(ReportTemplate template, List data, V fieldset);
+    public T build(ReportTemplate template, List<Map<?,?>>  data, V fieldset);
 }

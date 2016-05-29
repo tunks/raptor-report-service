@@ -7,6 +7,9 @@
  */
 package com.att.raptor.report.engine.query;
 
+import com.att.raptor.report.data.support.DataFieldType;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,6 +20,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
@@ -29,9 +34,10 @@ public final class QueryUtils {
         String name;
         Iterator<String> itr = fieldSet.iterator();
         Map<String, Object> map = new HashMap();
+        
         while (itr.hasNext()) {
             name = itr.next();
-            map.put(name, rs.getString(name));
+            map.put(name, rs.getObject(name));
         }
         return map;
     }
@@ -108,6 +114,31 @@ public final class QueryUtils {
         } else {
             createTableAlias(tableMap, count, table);
         }
+    }
+    
+    /**
+     * Transform string value to actual data object instance - Java reflection
+     * @param type
+     * @param value
+     * @return 
+     */
+    public static Object valueToObject( String type, String value){
+        try {
+            if(type.equals(String.class.getCanonicalName())){
+               return value;
+            }
+            Class clazz = Class.forName(type);
+            Method method = clazz.getDeclaredMethod("valueOf", String.class);
+            return method.invoke(clazz, value);
+        } catch (ClassNotFoundException | 
+                 NoSuchMethodException | 
+                 SecurityException | 
+                 IllegalAccessException |
+                 IllegalArgumentException | 
+                 InvocationTargetException ex) {
+            Logger.getLogger(JdbcQueryParser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     /**

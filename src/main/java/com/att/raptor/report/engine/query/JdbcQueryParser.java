@@ -150,7 +150,7 @@ public class JdbcQueryParser implements QueryParser<QuerySet,ReportComponent> {
                //create condition
                 if(valueType.equals(FieldValueType.CUSTOM_TYPE)){
                     DataFieldType fieldType = fieldArg.getFieldType();
-                    Object value = customValueObject(fieldType,fieldArg.getArgValue().getCustomValue());
+                    Object value = QueryUtils.valueToObject(fieldType.getType(),fieldArg.getArgValue().getCustomValue());
                     condition = createConditionQuery(column,fieldArg.getOperator(),value);
                 }
                 else{
@@ -192,24 +192,7 @@ public class JdbcQueryParser implements QueryParser<QuerySet,ReportComponent> {
                 query.addJoin(SelectQuery.JoinType.INNER, fromTable, toTable, fromColumn, toColumn);
     }
 
-    private Object customValueObject( DataFieldType fieldType, String value){
-        try {
-            if(fieldType.getType().equals(String.class.getCanonicalName())){
-               return value;
-            }
-            Class clazz = Class.forName(fieldType.getType());
-            Method method = clazz.getDeclaredMethod("valueOf", String.class);
-            return method.invoke(clazz, value);
-        } catch (ClassNotFoundException | 
-                 NoSuchMethodException | 
-                 SecurityException | 
-                 IllegalAccessException |
-                 IllegalArgumentException | 
-                 InvocationTargetException ex) {
-            Logger.getLogger(JdbcQueryParser.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+   
     
     @Override
     public QuerySet parse(ReportComponent component) {

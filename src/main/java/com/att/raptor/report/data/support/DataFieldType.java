@@ -21,7 +21,7 @@ public enum DataFieldType {
     DECIMAL(Types.DECIMAL, "java.lang.Double"),
     FLOAT(Types.REAL, "java.lang.Float"),
     INTEGER(Types.INTEGER, "java.lang.Integer"),
-    SMALLINT(Types.SMALLINT, "java.lang.Short"),
+    SMALLINT(Types.SMALLINT, "java.lang.Integer"),
     STRING(Types.VARCHAR, "java.lang.String"),
     TEXT(Types.LONGVARCHAR, "java.lang.String"),
     TIME(Types.TIME,"java.sql.Time"),
