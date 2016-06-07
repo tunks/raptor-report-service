@@ -5,8 +5,9 @@
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
-package com.att.raptor.report.engine.support;
+package com.att.raptor.report.engine.support.generators;
 
+import com.att.raptor.report.engine.support.generators.XlsxGenerator;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.logging.Level;
@@ -40,6 +41,7 @@ public class PdfGenerator extends JasperGenerator {
             configuration.setSizePageToContent(true);
             exporter.setConfiguration(configuration);
             exporter.exportReport();
+            
             return outputStream;
         } catch (JRException ex) {
             Logger.getLogger(XlsxGenerator.class.getName()).log(Level.SEVERE, null, ex);

@@ -7,16 +7,12 @@
  */
 package com.att.raptor.report.engine.support;
 
-import com.att.raptor.report.engine.support.generators.IGenerator;
-
 /**
- *
+ * ConsumerStream interface
  * @author ebrimatunkara
- * @param <P>
  * @param <T>
  */
-public interface  ReportBaseFactory<P,T extends IGenerator> {
-    public T createGenerator(ReportFormat format);
-    public T createGenerator(P object, ReportFormat format);    
-    public T createGenerator(P object, ReportFormat format, String directory); 
+public interface ConsumerStream<T> {
+    public T poll();
+    public boolean isComplete();
 }

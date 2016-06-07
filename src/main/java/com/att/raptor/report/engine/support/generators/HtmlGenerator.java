@@ -5,9 +5,10 @@
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
-package com.att.raptor.report.engine.support;
+package com.att.raptor.report.engine.support.generators;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ public class HtmlGenerator extends JasperGenerator<ByteArrayOutputStream>{
     public ByteArrayOutputStream generate() {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            //FileInputStream in = new FileInputStream(file);
             HtmlExporter exporter = new HtmlExporter();
             exporter.setExporterInput(SimpleExporterInput.getInstance(this.getJsPrint()));
             exporter.setExporterOutput(new SimpleHtmlExporterOutput(outputStream));

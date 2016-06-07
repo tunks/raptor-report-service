@@ -7,8 +7,6 @@
  */
 package com.att.raptor.report.engine.query;
 
-import java.util.Set;
-
 /**
  * QueryHandler interface
  *
@@ -19,5 +17,4 @@ import java.util.Set;
 public abstract class QueryHandler<T,V> {
     //public abstract void parseQuery(QueryService reportQueryService, ReportTemplate template);
     public abstract V parseQuery(T object);
-
 }

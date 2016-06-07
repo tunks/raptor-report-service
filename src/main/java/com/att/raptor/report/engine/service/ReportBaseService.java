@@ -10,6 +10,7 @@ package com.att.raptor.report.engine.service;
 import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.engine.query.QueryHandler;
 import com.att.raptor.report.engine.support.ReportFormat;
+import java.util.concurrent.ExecutionException;
 /**
  *
  * @author ebrimatunkara
@@ -17,5 +18,6 @@ import com.att.raptor.report.engine.support.ReportFormat;
  */
 public interface ReportBaseService<T>{
     public T generate(QueryHandler handler,ReportTemplate template  );
-    public T generate(QueryHandler handler, ReportTemplate template,ReportFormat format );
+    public T generate(QueryHandler handler, ReportTemplate template,ReportFormat format ) 
+            throws InterruptedException,ExecutionException;
 }

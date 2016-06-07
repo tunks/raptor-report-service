@@ -25,12 +25,17 @@ public class JdbcQueryFactory  implements QueryFactory<PreparedStatementCallback
     }
     
     public static PreparedStatementCallback createNewQueryCallback(QuerySet<ReportField> querySet){
-      Set<String> fieldSet = new HashSet();
+      Set<String> fieldSet = createResultFieldSet(querySet);
+      return  new JdbcQueryFactory().createQueryCallback(fieldSet);
+    }
+    
+    public static Set<String> createResultFieldSet(QuerySet<ReportField> querySet){
+         Set<String> fieldSet = new HashSet();
       Iterator<ReportField> itr = querySet.getFieldSet().iterator();
       while(itr.hasNext()){
         fieldSet.add(itr.next().getName());
       }
-      return  new JdbcQueryFactory().createQueryCallback(fieldSet);
+      return fieldSet;
     }
     
 }

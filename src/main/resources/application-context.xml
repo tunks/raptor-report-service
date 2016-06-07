@@ -17,6 +17,7 @@
     <!-- import the bean configuration files -->
     <import resource="spring-mongo-config.xml"/>
     <import resource="spring-jdbc-config.xml" />
+    <import resource="spring-redis-config.xml" />
     
     <!-- scan  report engine services  -->
     <context:component-scan base-package="com.att.raptor.report.engine.service" /> 

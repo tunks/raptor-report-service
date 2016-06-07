@@ -1,0 +1,54 @@
+{
+    "namespace": "com.att.report.core.support",
+    "type": "record",
+    "name": "QueryMessage",
+    "fields": [
+        {
+            "name": "eventId",
+            "type": "string"
+        },
+        {
+            "name": "queries",
+            "type": {
+                "type": "array",
+                "items": {
+                    "name": "QuerySet",
+                    "type": "record",
+                    "fields": [
+                        {"name": "componentId",
+                         "type": "string"
+                        },
+                        {
+                            "name": "queryString",
+                            "type": "string"
+                        },
+                        {
+                            "name": "fieldSet",
+                            "type": {
+                                "type": "array",
+                                "items": {
+                                    "name": "Field",
+                                    "type": "record",
+                                    "fields": [
+                                        {
+                                            "name": "fieldName",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "name": "dataType",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+
+            }
+
+        }
+
+    ]
+
+}

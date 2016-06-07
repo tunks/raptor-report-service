@@ -1,28 +1,17 @@
 /**
  * Raptor Reporting service
- * A simple reporing service that enable users to design and generate web-based reports.
+ * A simple reporting service that enable users to design and generate web-based reports.
  * Built on top of the JasperReports - an open source reporting library
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
 package com.att.raptor.report.engine.dao;
 
-import com.att.raptor.report.data.domain.DataField;
-import com.att.raptor.report.data.support.DataFieldType;
-import com.att.raptor.report.data.domain.DataSourceModel;
-import com.att.raptor.report.data.domain.DataSourceProperty;
-import java.sql.ResultSet;
-import com.att.raptor.report.engine.query.QueryUtils;
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -30,9 +19,10 @@ import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.MetaDataAccessException;
 import org.springframework.stereotype.Component;
-import com.att.raptor.report.engine.query.QueryUtils.QuerySet;
-import com.att.raptor.report.engine.query.callback.DbQueryCallback;
 import com.att.raptor.report.engine.query.callback.DbTableCallback;
+import com.att.raptor.report.engine.query.callback.StreamingStatementCreator;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowCallbackHandler;
 
 /**
  * JDBCDataDao class- implementation of the BaseDao This data source access
@@ -72,6 +62,17 @@ public class JdbcDataDao extends JdbcDaoSupport implements BaseDao<String, List>
     @Override
     public List getResults(String query, PreparedStatementCallback<List> callback) {
          return getJdbcTemplate().execute(query,callback);
+    }
+
+    @Override
+    public void query(String query, RowCallbackHandler callback) {
+          getJdbcTemplate().query(new StreamingStatementCreator(query), callback);
+    }
+
+    @Override
+    public void query(String query, ResultSetExtractor callback) {
+         // getJdbcTemplate().setFetchSize(0);
+          getJdbcTemplate().query(new StreamingStatementCreator(query), callback);
     }
 
 }

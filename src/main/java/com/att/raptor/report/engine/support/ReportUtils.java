@@ -7,16 +7,20 @@
  */
 package com.att.raptor.report.engine.support;
 
+import ar.com.fdvs.dj.core.DynamicJasperHelper;
+import com.att.raptor.report.engine.support.generators.IGenerator;
 import com.att.raptor.report.data.domain.ReportOutputFile;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.util.FileCopyUtils;
 
 /**
  * Http controller static helper functions
@@ -47,25 +51,30 @@ public class ReportUtils {
 
     }
 
-    public static  ByteArrayOutputStream   generateReport(List<JasperPrint> jsPrinter, ReportFormat format, String templateId) {
-        IGenerator<ByteArrayOutputStream> generator = JasperReportFactory.createNewGenerator(jsPrinter, format);
-        ByteArrayOutputStream out = generator.generate();
+    public static  OutputStream  generateReport(List<JasperPrint> jsPrinter, ReportFormat format, String templateId) {
+        IGenerator<OutputStream> generator = JasperReportFactory.createNewGenerator(jsPrinter, format);
+        OutputStream out = generator.generate();
         return out;
     }
-    
+   
+     public static  ReportOutputFile  generateReport(List<JasperPrint> jsPrinter, ReportFormat format, String templateId, String directory) {
+         IGenerator<ReportOutputFile> generator = JasperReportFactory.createNewGenerator(jsPrinter, format, directory);
+        return generator.generate();
+    }
     public static ReportOutputFile generateReportFile(List<JasperPrint> jsPrinter, ReportFormat format, String templateId,String directory) throws FileNotFoundException, IOException {
-        ByteArrayOutputStream out =  generateReport(jsPrinter,format,templateId) ;
+        OutputStream out =  generateReport(jsPrinter,format,templateId) ;
         String filename = templateId;
         String fileType = format.getFormat().toLowerCase();
         File file = File.createTempFile(filename,".".concat(fileType),new File(directory));
         String filePath = file.getAbsolutePath();
-        try (FileOutputStream fileOuputStream = new FileOutputStream(file)) {
-            fileOuputStream.write(out.toByteArray());
-        }
+        //FileCopyUtils.
+        FileOutputStream fileOuputStream = new FileOutputStream(file);
+
+        //FileCopyUtils.copy(in, out)
         return new ReportOutputFile(filePath, format);
     }
     
      public static ReportOutputFile generateReportFile(List<JasperPrint> jsPrinter, ReportFormat format, String templateId) throws FileNotFoundException, IOException {
-        return  generateReportFile(jsPrinter,format,templateId,null);
+         return  generateReportFile(jsPrinter,format,templateId,null);
     }
 }

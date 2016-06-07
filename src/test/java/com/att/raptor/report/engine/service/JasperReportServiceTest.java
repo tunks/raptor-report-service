@@ -7,6 +7,7 @@
  */
 package com.att.raptor.report.engine.service;
 
+import com.att.raptor.report.data.domain.ReportOutputFile;
 import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.data.service.ReportTemplateService;
 import com.att.raptor.report.engine.query.JdbcQueryHandler;
@@ -15,9 +16,9 @@ import com.att.raptor.report.engine.query.QueryParser;
 import com.att.raptor.report.engine.support.JasperReportFactory;
 import com.att.raptor.report.engine.support.ReportFormat;
 import com.att.raptor.report.starter.ReportServiceApplication;
+import java.util.concurrent.ExecutionException;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,12 +26,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -66,7 +61,7 @@ public class JasperReportServiceTest {
     public void setUp() {
         QueryParser  parser = JasperReportFactory.createQueryParser();
         handler = new JdbcQueryHandler(parser);
-       format = ReportFormat.formatType("html");
+        format = ReportFormat.formatType("html");
     }
 
     @After
@@ -76,14 +71,16 @@ public class JasperReportServiceTest {
 
     /**
      * Test of generate method, of class JasperReportService.
+     * @throws java.lang.InterruptedException
+     * @throws java.util.concurrent.ExecutionException
      */
     @Test
-    public void testProcess() {
+    public void testProcess() throws InterruptedException, ExecutionException {
         System.out.println("generate");
         String templateId = "5722328fd4c69551a9dcbb0f";// 5722328fd4c69551a9dcbb0f
         ReportTemplate template = reportTemplateService.find(templateId);
-        Object result = jasperReportService.generate(handler,template,format);
-        System.out.println(result);
+        ReportOutputFile result = jasperReportService.generate(handler,template,format.HTML);
+        System.out.println(result.getPath());
         assertNotNull(result);
     }
     

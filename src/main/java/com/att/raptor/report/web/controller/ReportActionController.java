@@ -42,7 +42,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/att/reports/action")
 public class ReportActionController {
-
     @Autowired
     private JasperReportService jasperReportService;
 

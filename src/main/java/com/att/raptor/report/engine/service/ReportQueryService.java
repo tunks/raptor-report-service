@@ -12,7 +12,11 @@ import com.att.raptor.report.engine.dao.JdbcDataDao;
 import com.att.raptor.report.engine.query.JdbcQueryFactory;
 import com.att.raptor.report.engine.query.QueryHandler;
 import com.att.raptor.report.engine.query.QueryUtils.QuerySet;
+import com.att.raptor.report.engine.query.callback.QueueStreamCallbackHandler;
+import com.att.raptor.report.engine.query.callback.StreamingResultSetExtractor;
+import com.att.raptor.report.engine.support.ProducerStream;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.stereotype.Service;
@@ -33,7 +37,8 @@ public class ReportQueryService implements QueryService<List,QuerySet>{
     }  
 
     @Override
-    public List query(QueryHandler handler, ReportTemplate template) {
-       return null;
+    public void query(QuerySet querySet, ProducerStream stream) {     
+        Set<String> fieldSet = JdbcQueryFactory.createResultFieldSet(querySet);
+        jdbcDatadao.query(querySet.getQueryString(), new QueueStreamCallbackHandler(stream,fieldSet));
     }
 }

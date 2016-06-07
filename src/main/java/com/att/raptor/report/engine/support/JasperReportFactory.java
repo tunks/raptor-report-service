@@ -7,8 +7,15 @@
  */
 package com.att.raptor.report.engine.support;
 
+import com.att.raptor.report.engine.support.generators.JasperGenerator;
+import com.att.raptor.report.engine.support.generators.HtmlGenerator;
+import com.att.raptor.report.engine.support.generators.PdfGenerator;
+import com.att.raptor.report.engine.support.generators.XlsxGenerator;
 import com.att.raptor.report.engine.query.JdbcQueryParser;
 import com.att.raptor.report.engine.query.QueryParser;
+import com.att.raptor.report.engine.support.generators.HtmlFileGenerator;
+import com.att.raptor.report.engine.support.generators.PdfFileGenerator;
+import com.att.raptor.report.engine.support.generators.XlsxFileGenerator;
 import java.util.List;
 import net.sf.jasperreports.engine.JasperPrint;
 
@@ -34,9 +41,25 @@ public class JasperReportFactory implements ReportBaseFactory<List<JasperPrint>,
         }
 
     }
-    
+
+    @Override
+    public JasperGenerator createGenerator(List<JasperPrint> jsPrints, ReportFormat format, String directory) {
+        switch (format) {
+            case XLSX:
+                return new XlsxFileGenerator(jsPrints,directory);
+            case PDF:
+                return new PdfFileGenerator(jsPrints,directory);
+            default:
+                return new HtmlFileGenerator(jsPrints,directory);
+        }
+
+    }    
    public static JasperGenerator createNewGenerator(List<JasperPrint> object, ReportFormat format) {
            return CreateFactory().createGenerator(object, format);
+    }
+
+    public static JasperGenerator createNewGenerator(List<JasperPrint> object, ReportFormat format,String directory) {
+           return CreateFactory().createGenerator(object, format,directory);
     }
 
     public static JasperReportFactory CreateFactory() {

@@ -11,6 +11,8 @@ import java.util.Set;
 import com.att.raptor.report.engine.query.QueryHandler;
 import java.util.List;
 import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 
 /**
@@ -34,4 +36,7 @@ public interface BaseDao<T,V>{
     * @return 
     */
    public V getResults(T query, PreparedStatementCallback<List> callback);
+   
+   public void query(T query, ResultSetExtractor callback);
+   public void query(T query, RowCallbackHandler callback);
 }

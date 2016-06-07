@@ -5,7 +5,7 @@
  * 2016 © ATT Service Assurance  - Raptor POC team
  *
  */
-package com.att.raptor.report.engine.support;
+package com.att.raptor.report.engine.support.generators;
 
 /**
  * Report IGenerator interface

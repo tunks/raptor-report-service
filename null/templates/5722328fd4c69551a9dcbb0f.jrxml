@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Close ticket_9201" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" scriptletClass="ar.com.fdvs.dj.core.DJDefaultScriptlet" whenResourceMissingType="Key" uuid="e115caec-7e4d-40b9-a129-60d81f78b401">
+	<style name="dj_style_1_" mode="Transparent" forecolor="#000000" backcolor="#C0C0C0" radius="0" hTextAlign="Left" hImageAlign="Left" vTextAlign="Middle" vImageAlign="Middle" rotation="None" isBlankWhenNull="true" fontName="Arial" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded="false">
+		<box padding="2">
+			<pen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="dj_style_2_" mode="Transparent" forecolor="#000000" backcolor="#C0C0C0" radius="0" hTextAlign="Left" hImageAlign="Left" vTextAlign="Middle" vImageAlign="Middle" rotation="None" isBlankWhenNull="true" fontName="Arial" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded="false">
+		<box padding="2">
+			<pen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="defaultDetailStyle" mode="Transparent" forecolor="#000000" backcolor="#FFFFFF" radius="0" hTextAlign="Left" hImageAlign="Left" vTextAlign="Bottom" vImageAlign="Bottom" rotation="None" isBlankWhenNull="true" fontName="Arial" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded="false">
+		<box padding="2">
+			<pen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Arial_for_column_Close ticket_9201_COLUMN_0_" mode="Transparent" forecolor="#000000" backcolor="#FFFFFF" radius="0" hTextAlign="Left" hImageAlign="Left" vTextAlign="Bottom" vImageAlign="Bottom" rotation="None" isBlankWhenNull="true" fontName="Arial" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded="false">
+		<box padding="2">
+			<pen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Arial_for_column_Close ticket_9201_COLUMN_1_" mode="Transparent" forecolor="#000000" backcolor="#FFFFFF" radius="0" hTextAlign="Left" hImageAlign="Left" vTextAlign="Bottom" vImageAlign="Bottom" rotation="None" isBlankWhenNull="true" fontName="Arial" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded="false">
+		<box padding="2">
+			<pen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<field name="weight" class="java.lang.Integer"/>
+	<field name="manufacturer" class="java.lang.String"/>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="header_weight" style="dj_style_1_" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="287" height="30" isPrintWhenDetailOverflows="true" uuid="24001a33-b61d-49fd-b271-e192c1fb5673"/>
+				<textFieldExpression><![CDATA["weight"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="header_Manufacturer" style="dj_style_2_" positionType="Float" stretchType="RelativeToTallestObject" x="287" y="0" width="288" height="30" isPrintWhenDetailOverflows="true" uuid="71c1aa2d-699d-4bb2-ad1e-c8eb5170085b"/>
+				<textFieldExpression><![CDATA["Manufacturer"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Immediate">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Arial_for_column_Close ticket_9201_COLUMN_0_" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="287" height="15" isPrintWhenDetailOverflows="true" uuid="2ab315d6-81f1-410b-8048-f1c1ac8bdfcd"/>
+				<textFieldExpression><![CDATA[$F{weight}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Arial_for_column_Close ticket_9201_COLUMN_1_" positionType="Float" stretchType="RelativeToTallestObject" x="287" y="0" width="288" height="15" isPrintWhenDetailOverflows="true" uuid="cf3a27a7-2aec-43ac-b357-b9fe67185478"/>
+				<textFieldExpression><![CDATA[$F{manufacturer}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

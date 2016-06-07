@@ -26,7 +26,7 @@ public enum DataFieldType {
     TEXT(Types.LONGVARCHAR, "java.lang.String"),
     TIME(Types.TIME,"java.sql.Time"),
     TIMESTAMP(Types.TIMESTAMP,"java.sql.Timestamp"),
-    TINYINT(Types.TINYINT,"java.lang.Byte");
+    TINYINT(Types.TINYINT,"java.lang.Integer");
    
     private final int index;
     private final String type;

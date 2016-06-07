@@ -9,6 +9,7 @@ package com.att.raptor.report.engine.service;
 
 import com.att.raptor.report.data.domain.ReportTemplate;
 import com.att.raptor.report.engine.query.QueryHandler;
+import com.att.raptor.report.engine.support.ProducerStream;
 
 /**
  * Query Service interface
@@ -18,5 +19,5 @@ import com.att.raptor.report.engine.query.QueryHandler;
  */
 public interface QueryService<T,V> {
       public T query(V object);
-      public T query(QueryHandler handler, ReportTemplate template);
+      public void query(V object, ProducerStream stream);
 }

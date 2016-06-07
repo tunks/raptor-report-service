@@ -7,7 +7,6 @@
  */
 package com.att.raptor.report.engine.query;
 
-import com.att.raptor.report.data.support.DataFieldType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
@@ -30,20 +29,22 @@ import org.apache.commons.lang3.RandomStringUtils;
  * @author ebrimatunkara
  */
 public final class QueryUtils {
-    public static Map<String, Object> extractFromRs(ResultSet rs, Set fieldSet) throws SQLException {
-        String name;
-        Iterator<String> itr = fieldSet.iterator();
+    public static Map<String, Object> extractFromRs(ResultSet rs, Set<String> fieldSet) throws SQLException {
+       // String name;
+        //Iterator<String> itr = fieldSet.iterator();
         Map<String, Object> map = new HashMap();
-        
-        while (itr.hasNext()) {
-            name = itr.next();
-            map.put(name, rs.getObject(name));
+        for(String name: fieldSet){
+           map.put(name, rs.getObject(name));
         }
+//        while (itr.hasNext()) {
+//            name = itr.next();
+//            map.put(name, rs.getObject(name));
+//        }
         return map;
     }
 
-    public static List<?> extractListFromRs(ResultSet rs, Set fieldSet) throws SQLException {
-        List list = new ArrayList();
+    public static List<Map<String,Object>> extractListFromRs(ResultSet rs, Set fieldSet) throws SQLException {
+        List<Map<String,Object>> list = new ArrayList();
         while (rs.next()) {
             list.add(extractFromRs(rs, fieldSet));
         }
