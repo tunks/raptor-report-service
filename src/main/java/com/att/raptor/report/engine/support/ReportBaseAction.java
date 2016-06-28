@@ -14,4 +14,5 @@ package com.att.raptor.report.engine.support;
  */
 public interface ReportBaseAction<T> {
      public <T> T generate(String templateId);
+     
 }

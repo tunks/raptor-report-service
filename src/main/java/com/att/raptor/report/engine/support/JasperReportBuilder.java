@@ -36,6 +36,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /**
  * @author ebrimatunkara JasperReportBuilder implementation 
@@ -98,7 +99,7 @@ public class JasperReportBuilder implements ReportBuilder<JasperPrint, Set<Repor
             DynamicReport report = prepare(template, fieldset);
             jreport = DynamicJasperHelper.generateJasperReport(report, new ClassicLayoutManager(), params);
             String filename = directory +"/templates/"+template.getId()+ ".jrxml";
-            DynamicJasperHelper.generateJRXML(jreport, DynamicJasperHelper.DEFAULT_XML_ENCODING, filename);
+            String xml = DynamicJasperHelper.generateJRXML(report, new ClassicLayoutManager(), params,DynamicJasperHelper.DEFAULT_XML_ENCODING);
 
         } catch (JRException ex) {
             Logger.getLogger(JasperReportBuilder.class.getName()).log(Level.SEVERE, null, ex);
